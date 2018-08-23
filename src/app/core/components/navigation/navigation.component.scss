@@ -1,0 +1,54 @@
+@import '../../../static/variables';
+
+.mst-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 0.5rem;
+  height: 3rem;
+
+  background-color: $white;
+  border-top: 1px solid $grey;
+}
+.mst-navigation-icon-right {
+  display: inline-block;
+}
+.mst-navigation-icon-down {
+  display: none;
+}
+@media screen and (min-width: $break-point) {
+  .mst-navigation {
+    width: 7rem;
+    height: auto;
+    left: calc(50% - 284px - 9rem);
+    bottom: auto;
+    top: 4.5rem;
+
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 1rem 0 0;
+
+    border: 0;
+  }
+  mst-link {
+    height: 2rem;
+  }
+  .mst-navigation-icon-right {
+    display: none;
+  }
+  .mst-navigation-icon-down {
+    display: inline-block;
+    height: 2rem;
+  }
+}
+@media screen and (max-width: $break-point - 1) {
+  .mst-navigation--hide {
+    display: none;
+  }
+}
