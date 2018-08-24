@@ -1,0 +1,77 @@
+<mst-go-back></mst-go-back>
+
+<div *ngIf="todo">
+  <mst-input [control]="titleControl"></mst-input>
+  <mst-tab [tabs]="tabs" [defaultTabKey]="activeTab" (newTab)="changeTab($event)"></mst-tab>
+
+  <div class="mst-todo-content">
+    <ng-container *ngIf="activeTab === 'report'">
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">days:</div>
+        <div class="mst-todo-content-item-value">
+          {{ todo.happenDate | daysDiff }}
+        </div>
+      </div>
+  
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">knowledge:</div>
+        <div class="mst-todo-content-item-value">
+          <mst-knowledge-slider [defaultKnowledge]="defaultKnowledge" (newKnowledge)="updateKnowledge($event)"></mst-knowledge-slider>
+        </div>
+      </div>
+
+      <div class="mst-todo-content-item mst-todo-content-item-time" *ngIf="todo.expectedTime">
+        <div class="mst-todo-content-item-title">spent time:</div>
+        <div class="mst-todo-content-item-value">
+          <mst-todo-timer [expectedTime]="todo.expectedTime" [usedTime]="todo.usedTime"></mst-todo-timer>
+        </div>
+      </div>
+
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">status:</div>
+        <div class="mst-todo-content-item-value">
+          <mst-picker [control]="statusControl" [options]="statusOptions"></mst-picker>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab === 'detail'">
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">happen date:</div>
+        <div class="mst-todo-content-item-value">
+          <mst-datepicker [defaultDate]="todo.happenDate" (newDate)="pickStartDate($event)"></mst-datepicker>
+        </div>
+      </div>
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">expected time:</div>
+        <div class="mst-todo-content-item-value">
+          {{ todo.expectedTime | secondFormatter }}
+        </div>
+      </div>
+      <div class="mst-todo-content-item" *ngIf="todo.note">
+        <div class="mst-todo-content-item-title">note:</div>
+        <div class="mst-todo-content-item-value">
+          {{ todo.note }}
+        </div>
+      </div>
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">created at:</div>
+        <div class="mst-todo-content-item-value">
+          {{ todo.createdAt | mstDate:'short' }}
+        </div>
+      </div>
+      <div class="mst-todo-content-item">
+        <div class="mst-todo-content-item-title">updated at:</div>
+        <div class="mst-todo-content-item-value">
+          {{ todo.updatedAt | mstDate:'short' }}
+        </div>
+      </div>
+      <div class="mst-todo-content-item" *ngIf="todo.finishedAt">
+        <div class="mst-todo-content-item-title">finished at:</div>
+        <div class="mst-todo-content-item-value">
+          {{ todo.finishedAt | mstDate:'short' }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

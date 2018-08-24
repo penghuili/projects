@@ -5,6 +5,7 @@ import { InputControl } from '../../model/input-control';
 import { PickerOption } from '../../model/picker';
 import { mapProjectStatusToText, Project, ProjectStatus } from '../../model/project';
 import { Tab } from '../../model/tab';
+import { Todo, TodoStatus } from '../../model/todo';
 
 @Component({
   selector: 'mst-project-detail',
@@ -13,6 +14,7 @@ import { Tab } from '../../model/tab';
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project;
+  todos: Todo[];
   titleControl = new InputControl<string>({ required: true });
   statusControl = new InputControl<PickerOption>({ required: true });
   startDate: number;
@@ -67,6 +69,41 @@ export class ProjectDetailComponent implements OnInit {
       status: ProjectStatus.Done,
       progress: 0.4
     }
+    this.todos = [
+      {
+        id: 1,
+        title: 'todo 1',
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        finishedAt: undefined,
+        projectId: 1,
+        note: 'note 1',
+        happenDate: Date.now(),
+        knowledge: 0.4,
+        // in seconds
+        expectedTime: 2000,
+        // in seconds
+        usedTime: 400,
+        status: TodoStatus.Doing
+      },
+      {
+        id: 2,
+        title: 'todo 2',
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        finishedAt: undefined,
+        projectId: 1,
+        note: 'note 2',
+        happenDate: Date.now(),
+        knowledge: 0.6,
+        // in seconds
+        expectedTime: 3000,
+        // in seconds
+        usedTime: 500,
+        status: TodoStatus.Done
+      }
+    ];
+
     const statusOption: PickerOption = { value: this.project.status, text: mapProjectStatusToText(this.project.status) };
     this.statusControl.setValue(statusOption);
 

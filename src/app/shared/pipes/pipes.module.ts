@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { DaysDiffPipe } from './days-diff.pipe';
 import { MstDatePipe } from './mst-date.pipe';
 import { ProjectStatusPipe } from './project-status.pipe';
 import { SecondFormatterPipe } from './second-formatter.pipe';
@@ -13,11 +14,13 @@ import { SecondFormatterPipe } from './second-formatter.pipe';
     ProjectStatusPipe,
     SecondFormatterPipe,
     MstDatePipe,
+    DaysDiffPipe,
   ],
   exports: [
     ProjectStatusPipe,
     SecondFormatterPipe,
-    MstDatePipe
+    MstDatePipe,
+    DaysDiffPipe
   ]
 })
 export class PipesModule { }

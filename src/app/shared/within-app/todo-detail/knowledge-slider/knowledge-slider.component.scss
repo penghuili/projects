@@ -1,0 +1,21 @@
+@import '../../../../static/variables';
+
+.mst-knowledge-slider-wrapper {
+  position: relative;
+}
+.mst-knowledge-slider-divider {
+  position: absolute;
+  left: 50%;
+  bottom: 0.25rem;
+  width: 3px;
+  height: 1.5rem;
+  background-color: $green;
+}
+.mst-knowledge-slider--clear .mst-slider-bar {
+  .mst-slider-active {
+    background-color: $green;
+  }
+  .mst-slider-thumb {
+    background-color: $green;
+  }
+}

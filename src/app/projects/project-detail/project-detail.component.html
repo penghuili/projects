@@ -81,4 +81,8 @@
       </div>
     </ng-container>
   </div>
+
+  <div class="mst-project-todos">
+    <mst-todo-item [todo]="todo" *ngFor="let todo of todos"></mst-todo-item>
+  </div>
 </div>

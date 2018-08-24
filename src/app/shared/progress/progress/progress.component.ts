@@ -8,6 +8,8 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 
 import { FONT_SIZE } from '../../../static/config';
@@ -25,6 +27,8 @@ export class ProgressComponent implements OnInit, OnChanges {
   @Input() starting = false;
   @Input() label: string;
   @Input() endLabel: string;
+  @Input() icon = 'label';
+  @Output() iconClicked = new EventEmitter<boolean>();
   @ViewChild('bar') bar: ElementRef;
 
   validWidth: number;

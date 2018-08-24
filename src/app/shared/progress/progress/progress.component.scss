@@ -6,9 +6,13 @@
   height: 0.25rem;
   background-color: $primary;
 }
+.mst-progress-end-label-wrapper {
+  position: absolute;
+}
 .mst-progress-end-label {
   position: absolute;
   bottom: -1.5rem;
+  right: 0;
 }
 .mst-progress-valid {
   position: absolute;
@@ -33,10 +37,17 @@
   top: 0;
   left: 0;
 }
-.mst-progress-thumb-label {
+.mst-progress-thumb-label-right {
   position: absolute;
   top: -0.5rem;
   left: 5px;
+  right: auto;
+}
+.mst-progress-thumb-label-left {
+  position: absolute;
+  top: -1rem;
+  right: 5px;
+  left: auto;
 }
 .mst-progress-thumb-shadow {
   position: absolute;

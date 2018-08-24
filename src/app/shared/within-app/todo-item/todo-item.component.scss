@@ -1,0 +1,12 @@
+@import '../../../static/variables';
+
+.mst-todo-item {
+  padding: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mst-todo-item--done {
+  color: $grey;
+  text-decoration: line-through;
+}

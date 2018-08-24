@@ -1,0 +1,5 @@
+<div class="mst-todo-item" *ngIf="todo"
+  [class.mst-todo-item--done]="todo.status === TodoStatus.Done"
+  (click)="goToDetail()">
+  {{ todo.title }}
+</div>

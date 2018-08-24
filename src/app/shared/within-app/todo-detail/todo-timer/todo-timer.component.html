@@ -1,0 +1,9 @@
+<div class="mst-todo-timer" *ngIf="expectedTime">
+  <mst-progress
+    [progress]="progress"
+    [starting]="isDoing"
+    [icon]="isDoing ? 'pause_circle_filled' : 'play_circle_filled'"
+    [label]="label"
+    [endLabel]="totalTime"
+    (iconClicked)="toggleTimer()"></mst-progress>
+</div>
