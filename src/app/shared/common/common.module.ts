@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { LinkComponent } from './link/link.component';
 import { OverlayComponent } from './overlay/overlay.component';
 import { ParagraphsComponent } from './paragraphs/paragraphs.component';
+import { TabComponent } from './tab/tab.component';
 
 
 @NgModule({
@@ -15,12 +16,14 @@ import { ParagraphsComponent } from './paragraphs/paragraphs.component';
   declarations: [
     LinkComponent,
     ParagraphsComponent,
-    OverlayComponent
+    OverlayComponent,
+    TabComponent
   ],
   exports: [
     LinkComponent,
     ParagraphsComponent,
-    OverlayComponent
+    OverlayComponent,
+    TabComponent
   ]
 })
 export class MonsterCommonModule { }

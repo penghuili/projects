@@ -1,0 +1,23 @@
+<div class="mst-u-no-select" (click)="onOpenDatepicker()">
+  {{ innerDate | mstDate:'shortDate' }}
+</div>
+
+<mst-overlay *ngIf="isShowDatepicker">
+  <div class="mst-datepicker-wrapper" *ngIf="isShowDatepicker">
+    <mst-datepicker-title [date]="innerDate" (openYear)="onOpenYear()" (today)="onGotoToday()"></mst-datepicker-title>
+
+    <mst-datepicker-month *ngIf="!isShowYear"
+      [activeDate]="innerDate"
+      [startDate]="startDate"
+      [endDate]="endDate"
+      (selectDate)="onSelectDate($event)"></mst-datepicker-month>
+
+    <mst-datepicker-year-list *ngIf="isShowYear"
+      [activeDate]="innerDate"
+      (selectYear)="onSelectYear($event)"></mst-datepicker-year-list>
+
+    <mst-cancel-confirm
+      (confirm)="onFinish()"
+      (cancel)="onCancel()"></mst-cancel-confirm>
+  </div>
+</mst-overlay>

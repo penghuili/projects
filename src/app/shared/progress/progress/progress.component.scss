@@ -8,10 +8,7 @@
 }
 .mst-progress-end-label {
   position: absolute;
-  top: -1.5rem;
-
-  width: 5rem;
-  text-align: right;
+  bottom: -1.5rem;
 }
 .mst-progress-valid {
   position: absolute;
@@ -38,7 +35,8 @@
 }
 .mst-progress-thumb-label {
   position: absolute;
-  top: -1.5rem;
+  top: -0.5rem;
+  left: 5px;
 }
 .mst-progress-thumb-shadow {
   position: absolute;

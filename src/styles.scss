@@ -12,6 +12,10 @@ a {
   color: $primary;
 }
 
+.mst-u-no-select {
+  user-select: none;
+}
+
 // icon
 mst-icon {
   width: 24px;

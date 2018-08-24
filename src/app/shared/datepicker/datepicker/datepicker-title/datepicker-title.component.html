@@ -1,0 +1,7 @@
+<div class="mst-datepicker-title">
+  <div>
+    <div class="mst-u-no-select" (click)="openYear.emit(true)">{{ date | date:'yyyy' }}</div>
+    <div class="mst-u-no-select">{{ date | date:'E, MMM d' }}</div>
+  </div>
+  <a [style.text-decoration]="'underline'" class="mst-u-no-select" (click)="today.emit(true)">Today</a>
+</div>

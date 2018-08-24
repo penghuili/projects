@@ -1,0 +1,18 @@
+@import '../../../static/variables';
+
+.mst-tab-wrapper {
+  display: flex;
+  justify-content: start;
+  padding: 1rem 0;
+}
+.mst-tab {
+  user-select: none;
+  padding-right: 1rem;
+}
+.mst-tab:last-of-type {
+  padding-right: 0;
+}
+.mst-tab--active {
+  color: $accent;
+  font-weight: 800;
+}

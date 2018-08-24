@@ -1,0 +1,24 @@
+<div class="mst-datepicker-month-nav">
+  <mst-icon name="keyboard_arrow_left" (click)="prevMonth()"></mst-icon>
+  <div class="mst-datepicker-month-current">{{ oneDayOfCurrentMonth | date:'MMMM yyyy' }}</div>
+  <mst-icon name="keyboard_arrow_right" (click)="nextMonth()"></mst-icon>
+</div>
+<mst-datepicker-month-row [days]="weeks"></mst-datepicker-month-row>
+<mst-datepicker-month-row
+  [days]="row1"
+  (selectDay)="onSelectDate($event)"></mst-datepicker-month-row>
+<mst-datepicker-month-row
+  [days]="row2"
+  (selectDay)="onSelectDate($event)"></mst-datepicker-month-row>
+<mst-datepicker-month-row
+  [days]="row3"
+  (selectDay)="onSelectDate($event)"></mst-datepicker-month-row>
+<mst-datepicker-month-row
+  [days]="row4"
+  (selectDay)="onSelectDate($event)"></mst-datepicker-month-row>
+<mst-datepicker-month-row
+  [days]="row5"
+  (selectDay)="onSelectDate($event)"></mst-datepicker-month-row>
+<mst-datepicker-month-row
+  [days]="row6"
+  (selectDay)="onSelectDate($event)"></mst-datepicker-month-row>
