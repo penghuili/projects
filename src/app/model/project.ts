@@ -31,3 +31,19 @@ export function createProject(data: any): Project {
     progress: 0
   };
 }
+export function mapProjectStatusToText(status: ProjectStatus): string {
+  if (!status) {
+    return '';
+  }
+
+  switch (status) {
+    case ProjectStatus.Active:
+      return 'active';
+    case ProjectStatus.WontDo:
+      return `won't do`;
+    case ProjectStatus.Done:
+      return 'done';
+    default:
+      return 'inactive';
+  }
+}

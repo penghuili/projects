@@ -1,0 +1,14 @@
+@import '../../../static/variables';
+
+.mst-picker-error {
+  padding: 0 0 1rem;
+
+  color: $white;
+  background-color: $error;
+}
+.mst-picker-item {
+  line-height: 2;
+}
+.mst-picker-active {
+  color: $accent;
+}

@@ -1,0 +1,15 @@
+<div (click)="onOpen()">{{ innerOption ? innerOption.text : 'select' }}</div>
+
+<mst-overlay *ngIf="isShow">
+  <ng-container *ngIf="isShow">
+    <div class="mst-picker-error" *ngIf="showError">you can have at most 4 active projects.</div>
+
+    <div class="mst-picker-item" *ngFor="let option of options"
+      [class.mst-picker-active]="innerOption && innerOption.value === option.value"
+      (click)="onSelect(option)">{{ option.text }}</div>
+
+    <mst-cancel-confirm
+      (confirm)="onConfirm()"
+      (cancel)="onCancel()"></mst-cancel-confirm>
+  </ng-container>
+</mst-overlay>

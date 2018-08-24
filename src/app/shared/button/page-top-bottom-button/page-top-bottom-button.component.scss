@@ -1,0 +1,12 @@
+@import '../../../static/variables';
+
+.mst-top-bottom-button {
+  position: fixed;
+  right: 3rem;
+  bottom: 4rem;
+}
+@media screen and (min-width: $break-point) {
+  .mst-top-bottom-button {
+    right: calc(50% - 230px);
+  }
+}

@@ -7,6 +7,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { InputService } from './services/input.service';
 import { LoadingService } from './services/loading.service';
+import { ProjectService } from './services/project.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { LoadingService } from './services/loading.service';
   ],
   providers: [
     LoadingService,
-    InputService
+    InputService,
+    ProjectService
   ]
 })
 export class CoreModule { }

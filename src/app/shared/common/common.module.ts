@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { LinkComponent } from './link/link.component';
+import { OverlayComponent } from './overlay/overlay.component';
 import { ParagraphsComponent } from './paragraphs/paragraphs.component';
 
 
@@ -14,10 +15,12 @@ import { ParagraphsComponent } from './paragraphs/paragraphs.component';
   declarations: [
     LinkComponent,
     ParagraphsComponent,
+    OverlayComponent
   ],
   exports: [
     LinkComponent,
-    ParagraphsComponent
+    ParagraphsComponent,
+    OverlayComponent
   ]
 })
 export class MonsterCommonModule { }
