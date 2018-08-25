@@ -1,0 +1,92 @@
+{
+  "configVersion": 1,
+  "index": "/projects/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/projects/favicon.ico",
+        "/projects/index.html",
+        "/projects/404.html",
+        "/projects/main.57af4f22faf388dc706e.js",
+        "/projects/polyfills.2f4a59095805af02bd79.js",
+        "/projects/runtime.a66f828dca56eeb90e02.js",
+        "/projects/styles.734542d151d786593e69.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/projects/assets/icons/add.svg",
+        "/projects/assets/icons/close.svg",
+        "/projects/assets/icons/done.svg",
+        "/projects/assets/icons/icon-128x128.png",
+        "/projects/assets/icons/icon-144x144.png",
+        "/projects/assets/icons/icon-192x192.png",
+        "/projects/assets/icons/icon-256x256.png",
+        "/projects/assets/icons/icon-512x512.png",
+        "/projects/assets/icons/icon-64x64.png",
+        "/projects/assets/icons/icon-72x72.png",
+        "/projects/assets/icons/icon-96x96.png",
+        "/projects/assets/icons/keyboard_arrow_down.svg",
+        "/projects/assets/icons/keyboard_arrow_left.svg",
+        "/projects/assets/icons/keyboard_arrow_right.svg",
+        "/projects/assets/icons/keyboard_arrow_up.svg",
+        "/projects/assets/icons/label.svg",
+        "/projects/assets/icons/pause_circle_filled.svg",
+        "/projects/assets/icons/play_circle_filled.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/projects/assets/icons/add.svg": "41754b5a047c8263d5981179004435358950b4e2",
+    "/projects/assets/icons/close.svg": "0b073f4318bee90a5342765ab7ec3188cad04c69",
+    "/projects/assets/icons/done.svg": "a0b356df3863855f20acd5c01195f1163d2baa50",
+    "/projects/assets/icons/icon-128x128.png": "48caf0338c79a505ebce1d8ebbe5a71f0d2931b1",
+    "/projects/assets/icons/icon-144x144.png": "e9177b490f309b337c57e56870a58a9bfd0d0b5a",
+    "/projects/assets/icons/icon-192x192.png": "57e2fc4fd1359d0543dd92c3c1a5fca6db1abf0b",
+    "/projects/assets/icons/icon-256x256.png": "129d2549f27e80bb5e72f121350f2dc376e45da2",
+    "/projects/assets/icons/icon-512x512.png": "875a1e4aed6a8a9e668b7dcab033b362daa5de99",
+    "/projects/assets/icons/icon-64x64.png": "1847319f934391f2ab66dc2f55890191e5a511a3",
+    "/projects/assets/icons/icon-72x72.png": "8309de3832301f589eba5b0c670013547e822fd3",
+    "/projects/assets/icons/icon-96x96.png": "477f637a1cf52cc31eb92dc7951ae9da90aafd15",
+    "/projects/assets/icons/keyboard_arrow_down.svg": "b2a9d678ebc114bd7e1e1abb3a33f0f793b2e6e8",
+    "/projects/assets/icons/keyboard_arrow_left.svg": "918bea706f8824b498000f69b48749a4bf61d3b5",
+    "/projects/assets/icons/keyboard_arrow_right.svg": "5e00b95fe1348a17cffb55a500217e4b181ed991",
+    "/projects/assets/icons/keyboard_arrow_up.svg": "27c547bc1e3dbd4114b47df465b25c643881cfe9",
+    "/projects/assets/icons/label.svg": "305a31ad25ae86b9590964be97dee14d0d48026d",
+    "/projects/assets/icons/pause_circle_filled.svg": "0d3c2270667a3a0285ddc3fc6f88606a0cafe4df",
+    "/projects/assets/icons/play_circle_filled.svg": "651d486f16d7cfd9d24e66746f68722711b85572",
+    "/projects/favicon.ico": "ca5239eaf26178a39a67ed187b5b28fc3559e4d4",
+    "/projects/index.html": "2938b38e0c41ff33a2347535f30ec1d89c616d65",
+    "/projects/main.57af4f22faf388dc706e.js": "3735542480f5cdcadcc1e18cade7a8716c69fd01",
+    "/projects/polyfills.2f4a59095805af02bd79.js": "8949bb1b1e302dda246f6ed9c2da703270360b1f",
+    "/projects/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
+    "/projects/styles.734542d151d786593e69.css": "2b584455620174860a4a31251c5bbd68c0eeb757"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
