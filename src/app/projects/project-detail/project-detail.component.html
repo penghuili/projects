@@ -79,6 +79,13 @@
           {{ project.finishedAt | date:'short' }}
         </div>
       </div>
+
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title"></div>
+        <div class="mst-dl-item-value">
+          <span class="mst-bold mst-error" (click)="delete()">delete</span>
+        </div>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="activeTab === 'chart'">

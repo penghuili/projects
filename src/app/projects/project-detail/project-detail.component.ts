@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { addDays, differenceInCalendarDays } from 'date-fns';
 import { Subject, BehaviorSubject } from 'rxjs';
 import {merge} from 'ramda';
@@ -56,6 +56,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
+    private router: Router,
     private todoService: TodoService) {
       super();
     }
@@ -89,6 +90,18 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   }
   createdTodo() {
     this.shouldLoadTodos.next(true);
+  }
+  delete() {
+    const sure = confirm('delete?');
+    if (sure) {
+      this.addSubscription(
+        this.projectService.delete(this.project.id).subscribe(success => {
+          if (success) {
+            this.router.navigate(['../'], {relativeTo: this.route});
+          }
+        })
+      );
+    }
   }
 
   private getProject(id: number) {

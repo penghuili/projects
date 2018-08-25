@@ -64,6 +64,14 @@
           <mst-slider [min]="0" [max]="60" [step]="1" [defaultValue]="defaultExpectedTime" (valueChange)="expectedTimeChange($event)"></mst-slider>
         </div>
       </div>
+  
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">note:</div>
+        <div class="mst-dl-item-value">
+          <mst-input [control]="noteControl" [hasBorder]="false"></mst-input>
+        </div>
+      </div>
+  
       <div class="mst-dl-item">
         <div class="mst-dl-item-title">created at:</div>
         <div class="mst-dl-item-value">
@@ -84,9 +92,9 @@
       </div>
 
       <div class="mst-dl-item">
-        <div class="mst-dl-item-title">note:</div>
+        <div class="mst-dl-item-title"></div>
         <div class="mst-dl-item-value">
-          <mst-input [control]="noteControl" [hasBorder]="false"></mst-input>
+          <span class="mst-bold mst-error" (click)="delete()">delete</span>
         </div>
       </div>
     </ng-container>

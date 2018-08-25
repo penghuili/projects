@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { merge } from 'ramda';
 import { of, Subject } from 'rxjs';
 import { debounceTime, filter, switchMap } from 'rxjs/operators';
@@ -50,6 +50,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
+    private router: Router,
     private todoService: TodoService) {
       super();
     }
@@ -90,6 +91,18 @@ export class TodoDetailComponent extends Unsub implements OnInit {
     const status = this.todo.status === TodoStatus.Doing ? TodoStatus.Done : TodoStatus.Doing;
     this.todo = merge<Todo, Partial<Todo>>(this.todo, { status });
     this.shouldUpdate.next(this.todo);
+  }
+  delete() {
+    const sure = confirm('delete?');
+    if (sure) {
+      this.addSubscription(
+        this.todoService.delete(this.todo.id).subscribe(success => {
+          if (success) {
+            this.router.navigate(['../../', this.project.id], {relativeTo: this.route});
+          }
+        })
+      );
+    }
   }
 
   private getTodo(todoId: number) {

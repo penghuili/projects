@@ -70,4 +70,15 @@ export class ProjectService {
       })
     );
   }
+  delete(id: number): Observable<boolean> {
+    return from(
+      this.db.getInstance().projects.delete(id)
+    ).pipe(
+      map(() => true),
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(false);
+      })
+    );
+  }
 }
