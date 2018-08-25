@@ -10,7 +10,7 @@ import { InputControl } from '../../../model/input-control';
 import { PickerOption } from '../../../model/picker';
 import { Project } from '../../../model/project';
 import { Tab } from '../../../model/tab';
-import { mapTodoStatusToText, Todo, TodoStatus, todoStatusOptions } from '../../../model/todo';
+import { Todo, TodoStatus } from '../../../model/todo';
 import { Unsub } from '../../../static/class/unsub';
 
 @Component({
@@ -30,7 +30,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   defaultKnowledge: number;
   defaultExpectedTime: number;
 
-  statusOptions: PickerOption[] = todoStatusOptions;
+  TodoStatus = TodoStatus;
   tabs: Tab[] = [
     {
       key: 'report',
@@ -86,6 +86,11 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   expectedTimeChange(time: number) {
     this.expectedTimeEvent.next(time * 60);
   }
+  toggleStatus() {
+    const status = this.todo.status === TodoStatus.Doing ? TodoStatus.Done : TodoStatus.Doing;
+    this.todo = merge<Todo, Partial<Todo>>(this.todo, { status });
+    this.shouldUpdate.next(this.todo);
+  }
 
   private getTodo(todoId: number) {
     this.addSubscription(
@@ -93,12 +98,10 @@ export class TodoDetailComponent extends Unsub implements OnInit {
         switchMap(todo => {
           if (todo) {
             this.todo = todo;
-            this.defaultKnowledge = this.todo.knowledge;
-            this.defaultExpectedTime = this.todo.expectedTime / 60;
-            const statusOption: PickerOption = this.statusOptions.find(a => a.value === this.todo.status);
-            this.statusControl.setValue(statusOption);
             this.titleControl.setValue(this.todo.title);
             this.noteControl.setValue(this.todo.note);
+            this.defaultKnowledge = this.todo.knowledge;
+            this.defaultExpectedTime = this.todo.expectedTime / 60;
 
             return this.projectService.getById(this.todo.projectId);
           } else {

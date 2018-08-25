@@ -32,7 +32,9 @@
       <div class="mst-dl-item">
         <div class="mst-dl-item-title">status:</div>
         <div class="mst-dl-item-value">
-          <mst-picker [control]="statusControl" [options]="statusOptions"></mst-picker>
+          <div class="mst-todo-detail-status"
+            [class.mst-green]="todo.status === TodoStatus.Done"
+            (click)="toggleStatus()">{{ todo.status | todoStatus }}</div>
         </div>
       </div>
     </ng-container>

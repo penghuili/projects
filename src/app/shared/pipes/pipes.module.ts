@@ -5,6 +5,7 @@ import { DaysDiffPipe } from './days-diff.pipe';
 import { MstDatePipe } from './mst-date.pipe';
 import { ProjectStatusPipe } from './project-status.pipe';
 import { SecondFormatterPipe } from './second-formatter.pipe';
+import { TodoStatusPipe } from './todo-status.pipe';
 
 @NgModule({
   imports: [
@@ -15,12 +16,14 @@ import { SecondFormatterPipe } from './second-formatter.pipe';
     SecondFormatterPipe,
     MstDatePipe,
     DaysDiffPipe,
+    TodoStatusPipe,
   ],
   exports: [
     ProjectStatusPipe,
     SecondFormatterPipe,
     MstDatePipe,
-    DaysDiffPipe
+    DaysDiffPipe,
+    TodoStatusPipe
   ]
 })
 export class PipesModule { }
