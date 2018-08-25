@@ -1,35 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { Project, ProjectStatus } from '../../model/project';
-import { MstLocalStorage } from '../../model/storage';
+import { DbService } from './db.service';
 
 @Injectable()
 export class ProjectService {
-  constructor() {}
+
+  constructor(private db: DbService) {}
 
   getInProgressProjects(): Observable<Project[]> {
-    const projects = MstLocalStorage.get('projects') || [];
-    return of(projects);
+    return from(
+      this.db.getInstance().projects
+      .filter(a => a.status === ProjectStatus.Active || a.status === ProjectStatus.Inactive)
+      .toArray()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
   }
   getById(id: number): Observable<Project> {
-    const projects = MstLocalStorage.get('projects') || [];
-    return of(projects.find(a => a.id === id));
+    return from(
+      this.db.getInstance().projects
+      .where('id')
+      .equals(id)
+      .first()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
   }
 
   create(project: Project): Observable<number> {
-    const projects = MstLocalStorage.get('projects') || [];
-    const id = project.createdAt;
-    project.id = id;
-    projects.push(project)
-    MstLocalStorage.set('projects', projects);
-
-    return of(id);
+    return from(
+      this.db.getInstance().projects.add(project)
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
   }
   update(project: Project): Observable<boolean> {
-    let projects: Project[] = MstLocalStorage.get('projects') || [];
-    projects = projects.map(a => a.id === project.id ? project : a);
-    MstLocalStorage.set('projects', projects);
-    return of(true);
+    return from(
+      this.db.getInstance().projects.put(project)
+    ).pipe(
+      map(() => true),
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(false);
+      })
+    );
   }
 }

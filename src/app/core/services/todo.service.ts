@@ -1,33 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
 import { Todo } from '../../model/todo';
-import { MstLocalStorage } from '../../model/storage';
+import { DbService } from './db.service';
 
 @Injectable()
 export class TodoService {
-  constructor() { }
+  constructor(private db: DbService) { }
 
   getTodosByProjectId(id: number): Observable<Todo[]> {
-    const todos = MstLocalStorage.get('todos') || [];
-    return of(todos.filter(a => a.projectId === id));
+    return from(
+      this.db.getInstance().todos
+      .where('projectId')
+      .equals(id)
+      .toArray()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
   }
   getById(id: number): Observable<Todo> {
-    const todos = MstLocalStorage.get('todos') || [];
-    return of(todos.find(a => a.id === id));
+    return from(
+      this.db.getInstance().todos
+      .where('id')
+      .equals(id)
+      .first()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
   }
 
   create(todo: Todo): Observable<number> {
-    const todos = MstLocalStorage.get('todos') || [];
-    const id = todo.createdAt;
-    todo.id = id;
-    todos.push(todo);
-    MstLocalStorage.set('todos', todos);
-    return of(id);
+    return from(
+      this.db.getInstance().todos.add(todo)
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
   }
   update(todo: Todo): Observable<boolean> {
-    let todos = MstLocalStorage.get('todos') || [];
-    todos = todos.map(a => a.id === todo.id ? todo : a);
-    MstLocalStorage.set('todos', todos);
-    return of(true);
+    return from(
+      this.db.getInstance().todos.put(todo)
+    ).pipe(
+      map(() => true),
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(false);
+      })
+    );
   }
 }

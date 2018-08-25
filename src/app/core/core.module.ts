@@ -5,6 +5,7 @@ import { MonsterCommonModule } from '../shared/common/common.module';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { DbService } from './services/db.service';
 import { InputService } from './services/input.service';
 import { LoadingService } from './services/loading.service';
 import { ProjectService } from './services/project.service';
@@ -29,7 +30,8 @@ import { TodoService } from './services/todo.service';
     LoadingService,
     InputService,
     ProjectService,
-    TodoService
+    TodoService,
+    DbService
   ]
 })
 export class CoreModule { }
