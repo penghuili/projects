@@ -10,10 +10,23 @@ export class ProjectService {
 
   constructor(private db: DbService) {}
 
-  getInProgressProjects(): Observable<Project[]> {
+  getInProgress(): Observable<Project[]> {
     return from(
       this.db.getInstance().projects
       .filter(a => a.status === ProjectStatus.Active || a.status === ProjectStatus.Inactive)
+      .reverse()
+      .toArray()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
+  }
+  getFinished(): Observable<Project[]> {
+    return from(
+      this.db.getInstance().projects
+      .filter(a => a.status === ProjectStatus.Done || a.status === ProjectStatus.WontDo)
       .toArray()
     ).pipe(
       catchError(error => {

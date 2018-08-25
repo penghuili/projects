@@ -24,7 +24,7 @@ export class ProjectsComponent extends Unsub implements OnInit {
   ngOnInit() {
     this.addSubscription(
       this.shouldLoad.asObservable().pipe(
-        switchMap(() => this.projectService.getInProgressProjects())
+        switchMap(() => this.projectService.getInProgress())
       ).subscribe(projects => {
         projects = projects || [];
         this.activeProjects = projects.filter(a => a.status === ProjectStatus.Active);

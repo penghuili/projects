@@ -1,1 +1,8 @@
-<div>achieved coming soon ...</div>
+<mst-timeline-item *ngFor="let p of projects; let i = index"
+  [time]="p.finishedAt"
+  [timeNext]="projects[i + 1] ? projects[i + 1].finishedAt : null"
+  [reverse]="true"
+  [id]="p.id">
+  <div [class.mst-grey]="p.status === ProjectStaus.WontDo"
+    [class.mst-green]="p.status === ProjectStaus.Done">{{ p.title }}</div>
+</mst-timeline-item>

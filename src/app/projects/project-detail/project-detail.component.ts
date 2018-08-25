@@ -11,7 +11,7 @@ import { Project, projectStatusOptions, ProjectStatus } from '../../model/projec
 import { Tab } from '../../model/tab';
 import { Todo, TodoStatus } from '../../model/todo';
 import { Unsub } from '../../static/class/unsub';
-import { switchMap, debounceTime } from 'rxjs/operators';
+import { switchMap, debounceTime, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'mst-project-detail',
@@ -147,7 +147,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   }
   private listenToStatusChange() {
     this.addSubscription(
-      this.statusControl.value$.subscribe(option => {
+      this.statusControl.value$.pipe(filter(a => !!a)).subscribe(option => {
         const finishedAt = option.value === ProjectStatus.WontDo || option.value === ProjectStatus.Done ? Date.now() : undefined;
         this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value, finishedAt });
         this.shouldUpdateProject.next(this.project);

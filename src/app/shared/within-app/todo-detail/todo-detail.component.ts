@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { merge } from 'ramda';
+import { of, Subject } from 'rxjs';
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
 
+import { ProjectService } from '../../../core/services/project.service';
 import { TodoService } from '../../../core/services/todo.service';
 import { InputControl } from '../../../model/input-control';
 import { PickerOption } from '../../../model/picker';
@@ -9,9 +12,6 @@ import { Project } from '../../../model/project';
 import { Tab } from '../../../model/tab';
 import { mapTodoStatusToText, Todo, TodoStatus } from '../../../model/todo';
 import { Unsub } from '../../../static/class/unsub';
-import { ProjectService } from '../../../core/services/project.service';
-import { Subject, of } from 'rxjs';
-import { switchMap, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'mst-todo-detail',
@@ -143,7 +143,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   }
   private listenToStatusChange() {
     this.addSubscription(
-      this.statusControl.value$.subscribe(option => {
+      this.statusControl.value$.pipe(filter(a => !!a)).subscribe(option => {
         const finishedAt = option.value === TodoStatus.Done ? Date.now() : undefined;
         this.todo = merge<Todo, Partial<Todo>>(this.todo, { status: <TodoStatus>option.value, finishedAt });
         this.shouldUpdate.next(this.todo);

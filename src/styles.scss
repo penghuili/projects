@@ -12,6 +12,36 @@ a {
   color: $primary;
 }
 
+// colors
+.mst-primary {
+  color: $primary;
+}
+.mst-white {
+  color: $white;
+}
+.mst-accent {
+  color: $accent;
+}
+.mst-green {
+  color: $green;
+}
+.mst-purple {
+  color: $purple;
+}
+.mst-yellow {
+  color: $yellow;
+}
+.mst-grey {
+  color: $grey;
+}
+.mst-grey-light {
+  color: $grey-light;
+}
+.mst-error {
+  color: $error;
+}
+
+
 .mst-card {
   border: 1px solid $grey-light;
 }
