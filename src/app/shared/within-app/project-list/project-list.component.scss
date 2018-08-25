@@ -1,0 +1,26 @@
+@import '../../../static/variables';
+
+.mst-project-list-error {
+  border: 1px solid $error;
+}
+.mst-project-list-icon {
+  display: flex;
+  justify-content: flex-end;
+}
+.mst-project-list-create {
+  display: flex;
+  justify-content: center;
+}
+.mst-project-list-project-item {
+  padding: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mst-project-list-project-item--active {
+  color: $accent;
+}
+.mst-project-list-inactive {
+  text-align: center;
+  font-size: 1.25rem;
+}

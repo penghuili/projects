@@ -19,7 +19,7 @@ export class KnowledgeSliderComponent {
 
   knowledge: number;
 
-  private _defaultKnowledge: number;
+  private _defaultKnowledge = 0;
 
   handleNewKnowledge(knowledge: number) {
     this.knowledge = knowledge;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { addDays } from 'date-fns';
 
 import { ProjectService } from '../../../core/services/project.service';
@@ -13,6 +13,7 @@ import { Unsub } from '../../../static/class/unsub';
   styleUrls: ['./project-create.component.scss']
 })
 export class ProjectCreateComponent extends Unsub {
+  @Input() useActionButton = true;
   @Output() created = new EventEmitter<boolean>();
   isShow = false;
 

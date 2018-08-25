@@ -22,13 +22,16 @@ import { FONT_SIZE } from '../../../static/config';
 export class SliderComponent implements OnChanges, OnInit {
   @Input() min = 0;
   @Input() max = 100;
+  @Input() step = 1;
   @Input() defaultValue = 0;
   @Output() valueChange = new EventEmitter<number>();
   @ViewChild('bar') bar: ElementRef;
   @ViewChild('thumb') thumb: ElementRef;
 
+  currentValue = this.min;
   left: number;
   deltaX: number;
+
   private barWidth: number;
 
   ngOnInit() {
@@ -39,7 +42,9 @@ export class SliderComponent implements OnChanges, OnInit {
     const hammer = new Hammer(this.thumb.nativeElement);
     hammer.on('panmove', (e) => {
       this.deltaX = e.deltaX;
-      this.valueChange.emit(this.getValue());
+      this.currentValue = this.getValue();
+      this.currentValue = this.step < 1 ? +this.currentValue.toFixed(1) : this.currentValue;
+      this.valueChange.emit(this.currentValue);
     });
     hammer.on('panend', (e) => {
       this.left = this.getLeft();
@@ -65,7 +70,9 @@ export class SliderComponent implements OnChanges, OnInit {
     return left < 0 ? 0 : left;
   }
   private getValue() {
-    return +(((this.getLeft() + FONT_SIZE / 2) / this.barWidth) * (this.max - this.min)).toFixed(1) + this.min;
+    const value = ((this.getLeft() + FONT_SIZE) / this.barWidth) * (this.max - this.min);
+    const rounded = Math.round(value / this.step) * this.step;
+    return rounded + this.min;
   }
   private setDefaultLeft() {
     if (this.barWidth) {

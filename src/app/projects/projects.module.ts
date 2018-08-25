@@ -12,7 +12,6 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectItemComponent } from './projects/project-item/project-item.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { ProjectCreateComponent } from './projects/project-create/project-create.component';
 
 @NgModule({
   imports: [
@@ -30,7 +29,6 @@ import { ProjectCreateComponent } from './projects/project-create/project-create
     ProjectsComponent,
     ProjectItemComponent,
     ProjectDetailComponent,
-    ProjectCreateComponent,
   ]
 })
 export class ProjectsModule { }

@@ -92,3 +92,5 @@
     <div *ngIf="todos && todos.length === 0">no todos yet.</div>
   </div>
 </div>
+
+<mst-todo-create [project]="project" (created)="createdTodo()"></mst-todo-create>

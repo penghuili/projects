@@ -1,0 +1,55 @@
+<mst-action-button *ngIf="useActionButton" [showPlus]="true" (clicked)="open()"></mst-action-button>
+<mst-icon *ngIf="!useActionButton" name="add" [color]="plusColor" (click)="open()"></mst-icon>
+
+<mst-overlay *ngIf="isShow">
+  <ng-container *ngIf="isShow">
+    <mst-input
+      [control]="titleControl"
+      [autoFocus]="true"></mst-input>
+
+    <div class="mst-card  mst-padding-0-5 mst-padding-bottom-1-5 mst-margin-top-0-5">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">project:</div>
+        <div class="mst-dl-item-value">
+          <mst-project-list [activeProject]="project" (selected)="selectProject($event)"></mst-project-list>
+        </div>
+      </div>
+
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">happen date:</div>
+        <div class="mst-dl-item-value">
+          <mst-datepicker
+            [defaultDate]="happenDate"
+            [startDate]="datepickerStartDate"
+            [endDate]="datepickerEndDate"
+           (newDate)="pickHanppenDate($event)"></mst-datepicker>
+        </div>
+      </div>
+
+      <div class="mst-dl-item mst-dl-item-center mst-todo-create-clear">
+        <div class="mst-dl-item-title">how clear:</div>
+        <div class="mst-dl-item-value">
+          <mst-knowledge-slider (newKnowledge)="knowledgeChange($event)"></mst-knowledge-slider>
+        </div>
+      </div>
+
+      <div class="mst-dl-item mst-dl-item-center">
+        <div class="mst-dl-item-title">expected time:</div>
+        <div class="mst-dl-item-value">
+          <mst-slider [min]="0" [max]="60" [step]="1" (valueChange)="durationChange($event)"></mst-slider>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="mst-margin-top-1-0">
+      <mst-input
+        [control]="noteControl"
+        minHeight="3rem"></mst-input>
+    </div>
+    
+    <mst-cancel-confirm
+      (confirm)="create()"
+      (cancel)="cancel()"></mst-cancel-confirm>
+  </ng-container>
+</mst-overlay>

@@ -1,0 +1,30 @@
+<span [class.mst-project-list-error]="hasError" (click)="open()">
+  {{ innerProject ? innerProject.title : 'select' }}
+</span>
+
+<mst-overlay *ngIf="isShow">
+  <ng-container *ngIf="isShow">
+    <div class="mst-project-list-icon">
+      <mst-icon name="close" (click)="close()"></mst-icon>
+    </div>
+
+    <div class="mst-project-list-create">
+      <mst-project-create [useActionButton]="false" (created)="createdProject()"></mst-project-create>
+    </div>
+
+    <div class="mst-project-list-project-item" *ngFor="let project of activeProjects"
+      [class.mst-project-list-project-item--active]="activeProject && activeProject.id === project.id"
+      (click)="selectProject(project)">
+      {{ project.title }}
+    </div>
+
+    <div class="mst-project-list-inactive" *ngIf="inactiveProjects && inactiveProjects.length > 0">
+      inactive
+    </div>
+    <div class="mst-project-list-project-item" *ngFor="let project of inactiveProjects"
+      [class.mst-project-list-project-item--active]="activeProject && activeProject.id === project.id"
+      (click)="selectProject(project)">
+      {{ project.title }}
+    </div>
+  </ng-container>
+</mst-overlay>

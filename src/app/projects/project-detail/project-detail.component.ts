@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { addDays, differenceInCalendarDays } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import {merge} from 'ramda';
 import { ProjectService } from '../../core/services/project.service';
 import { TodoService } from '../../core/services/todo.service';
@@ -49,7 +49,8 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   ];
   activeTab = 'report';
 
-  private shouldUpdate = new Subject<Project>();
+  private shouldUpdateProject = new Subject<Project>();
+  private shouldLoadTodos = new BehaviorSubject<boolean>(true);
 
   constructor(
     private projectService: ProjectService,
@@ -78,12 +79,15 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
       this.endDate = addDays(this.startDate, 1).getTime();
     }
     this.project = merge<Project, Partial<Project>>(this.project, { startDate: this.startDate, endDate: this.endDate });
-    this.shouldUpdate.next(this.project);
+    this.shouldUpdateProject.next(this.project);
   }
   pickEndDate(date: number) {
     this.endDate = date;
     this.project = merge<Project, Partial<Project>>(this.project, { endDate: this.endDate });
-    this.shouldUpdate.next(this.project);
+    this.shouldUpdateProject.next(this.project);
+  }
+  createdTodo() {
+    this.shouldLoadTodos.next(true);
   }
 
   private getProject(id: number) {
@@ -109,18 +113,20 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   }
   private getTodos(id: number) {
     this.addSubscription(
-      this.todoService.getTodosByProjectId(id).subscribe(todos => {
+      this.shouldLoadTodos.asObservable().pipe(
+        switchMap(() => this.todoService.getTodosByProjectId(id))
+      ).subscribe(todos => {
         this.todos = todos;
         if (todos) {
           this.doneTodos = todos.filter(a => a.status === TodoStatus.Done);
-          this.clearTodos = todos.filter(a => a.status === TodoStatus.Doing || a.knowledge >= 0.5);
+          this.clearTodos = todos.filter(a => a.status === TodoStatus.Done || a.knowledge >= 0.5);
         }
       })
     );
   }
   private updateProject() {
     this.addSubscription(
-      this.shouldUpdate.asObservable().pipe(
+      this.shouldUpdateProject.asObservable().pipe(
         switchMap(project => this.projectService.update(project))
       ).subscribe(success => {
 
@@ -131,7 +137,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.addSubscription(
       this.titleControl.value$.pipe(debounceTime(500)).subscribe(title => {
         this.project = merge<Project, Partial<Project>>(this.project, { title });
-        this.shouldUpdate.next(this.project);
+        this.shouldUpdateProject.next(this.project);
       })
     );
   }
@@ -139,7 +145,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.addSubscription(
       this.statusControl.value$.subscribe(option => {
         this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value });
-        this.shouldUpdate.next(this.project);
+        this.shouldUpdateProject.next(this.project);
       })
     );
   }
@@ -147,7 +153,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.addSubscription(
       this.goalControl.value$.pipe(debounceTime(500)).subscribe(goal => {
         this.project = merge<Project, Partial<Project>>(this.project, { goal });
-        this.shouldUpdate.next(this.project);
+        this.shouldUpdateProject.next(this.project);
       })
     );
   }
