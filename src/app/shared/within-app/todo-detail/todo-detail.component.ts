@@ -10,7 +10,7 @@ import { InputControl } from '../../../model/input-control';
 import { PickerOption } from '../../../model/picker';
 import { Project } from '../../../model/project';
 import { Tab } from '../../../model/tab';
-import { mapTodoStatusToText, Todo, TodoStatus } from '../../../model/todo';
+import { mapTodoStatusToText, Todo, TodoStatus, todoStatusOptions } from '../../../model/todo';
 import { Unsub } from '../../../static/class/unsub';
 
 @Component({
@@ -30,17 +30,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   defaultKnowledge: number;
   defaultExpectedTime: number;
 
-  statusOptions: PickerOption[] = [
-    {
-      value: TodoStatus.Doing,
-      text: 'doing'
-    },
-    {
-      value: TodoStatus.Done,
-      text: 'done',
-      color: 'green'
-    }
-  ];
+  statusOptions: PickerOption[] = todoStatusOptions;
   tabs: Tab[] = [
     {
       key: 'report',
@@ -105,7 +95,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
             this.todo = todo;
             this.defaultKnowledge = this.todo.knowledge;
             this.defaultExpectedTime = this.todo.expectedTime / 60;
-            const statusOption: PickerOption = { value: this.todo.status, text: mapTodoStatusToText(this.todo.status) };
+            const statusOption: PickerOption = this.statusOptions.find(a => a.value === this.todo.status);
             this.statusControl.setValue(statusOption);
             this.titleControl.setValue(this.todo.title);
             this.noteControl.setValue(this.todo.note);

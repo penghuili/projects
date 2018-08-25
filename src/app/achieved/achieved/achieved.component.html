@@ -6,3 +6,5 @@
   <div [class.mst-grey]="p.status === ProjectStaus.WontDo"
     [class.mst-green]="p.status === ProjectStaus.Done">{{ p.title }}</div>
 </mst-timeline-item>
+
+<div *ngIf="projects && projects.length === 0">no projects done.</div>

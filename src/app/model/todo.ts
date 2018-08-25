@@ -1,3 +1,5 @@
+import { PickerOption } from './picker';
+
 export interface Todo {
   id?: number;
   title: string;
@@ -18,6 +20,19 @@ export enum TodoStatus {
   Doing = 'Doing',
   Done = 'Done'
 }
+
+// data
+export const todoStatusOptions: PickerOption[] = [
+  {
+    value: TodoStatus.Doing,
+    text: 'doing'
+  },
+  {
+    value: TodoStatus.Done,
+    text: 'done',
+    color: 'green'
+  }
+];
 
 export function mapTodoStatusToText(status: TodoStatus): string {
   if (!status) {
