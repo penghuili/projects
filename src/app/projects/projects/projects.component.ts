@@ -1,43 +1,40 @@
 import { Component, OnInit } from '@angular/core';
+
+import { ProjectService } from '../../core/services/project.service';
 import { Project, ProjectStatus } from '../../model/project';
+import { Unsub } from '../../static/class/unsub';
+import { Subject, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'mst-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
-export class ProjectsComponent implements OnInit {
-  projects: Project[];
+export class ProjectsComponent extends Unsub implements OnInit {
+  activeProjects: Project[];
+  inactiveProjects: Project[];
 
-  constructor() { }
+  private shouldLoad = new BehaviorSubject<boolean>(true);
+
+  constructor(private projectService: ProjectService) {
+    super();
+  }
 
   ngOnInit() {
-    this.projects = [
-      {
-        id: 1,
-        title: 'project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1',
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        finishedAt: undefined,
-        startDate: Date.now(),
-        endDate: Date.now(),
-        goal: 'goal 1',
-        status: ProjectStatus.Active,
-        progress: 0.4
-      },
-      {
-        id: 2,
-        title: 'project 2',
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        finishedAt: undefined,
-        startDate: Date.now(),
-        endDate: Date.now(),
-        goal: 'goal 2',
-        status: ProjectStatus.Active,
-        progress: 0.7
-      }
-    ];
+    this.addSubscription(
+      this.shouldLoad.asObservable().pipe(
+        switchMap(() => this.projectService.getInProgressProjects())
+      ).subscribe(projects => {
+        projects = projects || [];
+        this.activeProjects = projects.filter(a => a.status === ProjectStatus.Active);
+        this.inactiveProjects = projects.filter(a => a.status === ProjectStatus.Inactive);
+      })
+    );
+  }
+
+  reload() {
+    this.shouldLoad.next(true);
   }
 
 }

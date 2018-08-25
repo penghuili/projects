@@ -1,0 +1,43 @@
+<mst-action-button [showPlus]="true" (clicked)="open()"></mst-action-button>
+
+<mst-overlay *ngIf="isShow">
+  <ng-container *ngIf="isShow">
+    <mst-input
+      [control]="titleControl"
+      [autoFocus]="true"></mst-input>
+    
+    <div class="mst-card  mst-padding-0-5 mst-margin-top-0-5">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">status</div>
+        <div class="mst-dl-item-value">
+          <mst-picker [control]="statusControl" [options]="statusOptions"></mst-picker>
+        </div>
+      </div>
+
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">start date:</div>
+        <div class="mst-dl-item-value">
+          <mst-datepicker [defaultDate]="defaultStartDate" (newDate)="pickStartDate($event)"></mst-datepicker>
+        </div>
+      </div>
+
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">end date:</div>
+        <div class="mst-dl-item-value">
+          <mst-datepicker [defaultDate]="defaultEndDate" [startDate]="startOfDefaultEndDate" (newDate)="pickEndDate($event)"></mst-datepicker>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mst-margin-top-0-5">
+      goal:
+      <mst-input
+        [control]="goalControl"
+        minHeight="3rem"></mst-input>
+    </div>
+  
+    <mst-cancel-confirm
+      (confirm)="create()"
+      (cancel)="onCancel()"></mst-cancel-confirm>
+  </ng-container>
+</mst-overlay>

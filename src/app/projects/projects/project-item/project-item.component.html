@@ -1,6 +1,6 @@
-<div class="mst-project-item-wrapper" *ngIf="project" (click)="goToDetail()">
+<div class="mst-card mst-padding-0-5" *ngIf="project" (click)="goToDetail()">
   <div class="mst-project-item-title">{{ project.title }}</div>
-  <div>
+  <div class="mst-project-item-progress">
     <mst-progress [progress]="project.progress"></mst-progress>
   </div>
 </div>

@@ -1,5 +1,17 @@
 @import '../../../static/variables';
 
+.mst-picker-current {
+  font-weight: bold;
+}
+.mst-picker-grey {
+  color: $grey;
+}
+.mst-picker-green {
+  color: $green;
+}
+.mst-picker-purple {
+  color: $purple;
+}
 .mst-picker-error {
   padding: 0 0 1rem;
 

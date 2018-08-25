@@ -37,16 +37,16 @@
   top: 0;
   left: 0;
 }
+.mst-progress-thumb-label-left {
+  position: absolute;
+  top: -0.5rem;
+  left: 10px;
+  right: auto;
+}
 .mst-progress-thumb-label-right {
   position: absolute;
   top: -0.5rem;
-  left: 5px;
-  right: auto;
-}
-.mst-progress-thumb-label-left {
-  position: absolute;
-  top: -1rem;
-  right: 5px;
+  right: 10px;
   left: auto;
 }
 .mst-progress-thumb-shadow {

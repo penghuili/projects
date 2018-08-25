@@ -27,7 +27,8 @@ export class TodoDetailComponent implements OnInit {
     },
     {
       value: TodoStatus.Done,
-      text: 'done'
+      text: 'done',
+      color: 'green'
     }
   ];
   tabs: Tab[] = [
@@ -52,7 +53,7 @@ export class TodoDetailComponent implements OnInit {
       updatedAt: Date.now(),
       finishedAt: undefined,
       projectId: 1,
-      note: 'note 1',
+      note: 'note 1 note 1 note 1note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 note 1 ',
       happenDate: Date.now(),
       knowledge: 0.4,
       // in seconds
@@ -73,5 +74,8 @@ export class TodoDetailComponent implements OnInit {
   }
   updateKnowledge(knowledge: number) {
     this.todo = merge<Todo, Partial<Todo>>(this.todo, { knowledge });
+  }
+  pickHappenDate(date: number) {
+    this.todo = merge<Todo, Partial<Todo>>(this.todo, { happenDate: date });
   }
 }

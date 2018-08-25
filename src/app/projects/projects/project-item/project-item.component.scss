@@ -1,14 +1,12 @@
 @import '../../../static/variables';
 
-.mst-project-item-wrapper {
-  padding: 0.5rem;
-
-  border: 1px solid $grey-light;
-}
 .mst-project-item-title {
   padding-bottom: 2rem;
   
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.mst-project-item-progress {
+  padding-right: 3rem;
 }

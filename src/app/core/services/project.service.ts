@@ -1,41 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Project, ProjectStatus } from '../../model/project';
+import { Project } from '../../model/project';
+import { MstLocalStorage } from '../../model/storage';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProjectService {
+  constructor() {}
 
-  constructor() { }
+  getInProgressProjects(): Observable<Project[]> {
+    const projects = MstLocalStorage.get('projects');
+    return of(projects);
+  }
+  getById(id: number): Observable<Project> {
+    const projects = MstLocalStorage.get('projects');
+    return of(projects.find(a => a.id === id));
+  }
 
-  getActiveProjects(): Observable<Project[]> {
-    return of([
-      {
-        id: 1,
-        title: 'project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1 project 1',
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        finishedAt: undefined,
-        startDate: Date.now(),
-        endDate: Date.now(),
-        goal: 'goal 1',
-        status: ProjectStatus.Active,
-        progress: 0.4
-      },
-      {
-        id: 2,
-        title: 'project 2',
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
-        finishedAt: undefined,
-        startDate: Date.now(),
-        endDate: Date.now(),
-        goal: 'goal 2',
-        status: ProjectStatus.Active,
-        progress: 0.7
-      }
-    ]);
+  create(project: Project): Observable<number> {
+    const projects = MstLocalStorage.get('projects');
+    const id = project.createdAt;
+    project.id = id;
+    projects.push(project)
+    MstLocalStorage.set('projects', projects);
+
+    return of(id);
+  }
+  update(project: Project): Observable<boolean> {
+    let projects: Project[] = MstLocalStorage.get('projects');
+    projects = projects.map(a => a.id === project.id ? project : a);
+    MstLocalStorage.set('projects', projects);
+    return of(true);
   }
 }

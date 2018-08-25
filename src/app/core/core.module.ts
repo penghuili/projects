@@ -8,6 +8,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { InputService } from './services/input.service';
 import { LoadingService } from './services/loading.service';
 import { ProjectService } from './services/project.service';
+import { TodoService } from './services/todo.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ProjectService } from './services/project.service';
   providers: [
     LoadingService,
     InputService,
-    ProjectService
+    ProjectService,
+    TodoService
   ]
 })
 export class CoreModule { }

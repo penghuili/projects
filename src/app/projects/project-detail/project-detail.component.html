@@ -4,85 +4,91 @@
   <mst-input [control]="titleControl"></mst-input>
   <mst-tab [tabs]="tabs" [defaultTabKey]="activeTab" (newTab)="changeTab($event)"></mst-tab>
 
-  <div class="mst-project-content">
+  <div class="mst-card mst-padding-0-5 mst-padding-top-1-0">
     <ng-container *ngIf="activeTab === 'report'">
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">clear todos:</div>
-        <div class="mst-project-content-item-value">
-          <mst-progress [progress]="0.1" [label]="6" [endLabel]="10"></mst-progress>
+      <div class="mst-dl-item mst-dl-item-center" *ngIf="todos && todos.length > 0">
+        <div class="mst-dl-item-title">clear todos:</div>
+        <div class="mst-dl-item-value">
+          <mst-progress [progress]="clearTodos.length / todos.length" [label]="clearTodos.length" [endLabel]="todos.length"></mst-progress>
         </div>
       </div>
   
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">done todos:</div>
-        <div class="mst-project-content-item-value">
-          <mst-progress [progress]="0.4" [label]="4" [endLabel]="10"></mst-progress>
+      <div class="mst-dl-item mst-dl-item-center" *ngIf="todos && todos.length > 0">
+        <div class="mst-dl-item-title">done todos:</div>
+        <div class="mst-dl-item-value">
+          <mst-progress [progress]="doneTodos.length / todos.length" [label]="doneTodos.length" [endLabel]="todos.length"></mst-progress>
         </div>
       </div>
   
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">days:</div>
-        <div class="mst-project-content-item-value">
-          <mst-progress [progress]="0.8" [label]="8" [endLabel]="10"></mst-progress>
+      <div class="mst-dl-item mst-dl-item-center">
+        <div class="mst-dl-item-title">days:</div>
+        <div class="mst-dl-item-value">
+          <mst-progress [progress]="usedDays / totalDays" [label]="usedDays" [endLabel]="totalDays"></mst-progress>
         </div>
       </div>
   
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">spent time:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">spent time:</div>
+        <div class="mst-dl-item-value">
           {{ 10000 | secondFormatter }}
         </div>
       </div>
   
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">status:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">status:</div>
+        <div class="mst-dl-item-value">
           <mst-picker [control]="statusControl" [options]="statusOptions"></mst-picker>
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngIf="activeTab === 'detail'">
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">start date:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">start date:</div>
+        <div class="mst-dl-item-value">
           <mst-datepicker [defaultDate]="startDate" (newDate)="pickStartDate($event)"></mst-datepicker>
         </div>
       </div>
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">end date:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">end date:</div>
+        <div class="mst-dl-item-value">
           <mst-datepicker [defaultDate]="endDate" [startDate]="startOfEndDate" (newDate)="pickEndDate($event)"></mst-datepicker>
         </div>
       </div>
-      <div class="mst-project-content-item" *ngIf="project.goal">
-        <div class="mst-project-content-item-title">goal:</div>
-        <div class="mst-project-content-item-value">
-          {{ project.goal }}
+      <div class="mst-dl-item" *ngIf="project.goal">
+        <div class="mst-dl-item-title">goal:</div>
+        <div class="mst-dl-item-value">
+          <mst-input [control]="goalControl" [hasBorder]="false"></mst-input>
         </div>
       </div>
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">created at:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">created at:</div>
+        <div class="mst-dl-item-value">
           {{ project.createdAt | mstDate:'short' }}
         </div>
       </div>
-      <div class="mst-project-content-item">
-        <div class="mst-project-content-item-title">updated at:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">updated at:</div>
+        <div class="mst-dl-item-value">
           {{ project.updatedAt | mstDate:'short' }}
         </div>
       </div>
-      <div class="mst-project-content-item" *ngIf="project.finishedAt">
-        <div class="mst-project-content-item-title">finished at:</div>
-        <div class="mst-project-content-item-value">
+      <div class="mst-dl-item" *ngIf="project.finishedAt">
+        <div class="mst-dl-item-title">finished at:</div>
+        <div class="mst-dl-item-value">
           {{ project.finishedAt | mstDate:'short' }}
         </div>
       </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab === 'chart'">
+      coming soon
     </ng-container>
   </div>
 
   <div class="mst-project-todos">
     <mst-todo-item [todo]="todo" *ngFor="let todo of todos"></mst-todo-item>
+
+    <div *ngIf="todos && todos.length === 0">no todos yet.</div>
   </div>
 </div>

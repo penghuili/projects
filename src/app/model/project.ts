@@ -1,3 +1,6 @@
+import { PickerOption } from "./picker";
+
+// model
 export interface Project {
   id?: number;
   title: string;
@@ -17,6 +20,29 @@ export enum ProjectStatus {
   Done = 'Done'
 }
 
+// data
+export const projectStatusOptions: PickerOption[] = [
+  {
+    value: ProjectStatus.Inactive,
+    text: 'inactive'
+  },
+  {
+    value: ProjectStatus.Active,
+    text: 'active'
+  },
+  {
+    value: ProjectStatus.WontDo,
+    text: `won't do`,
+    color: 'purple'
+  },
+  {
+    value: ProjectStatus.Done,
+    text: 'done',
+    color: 'green'
+  }
+];
+
+// function
 export function createProject(data: any): Project {
   const timestamp = Date.now();
   return {

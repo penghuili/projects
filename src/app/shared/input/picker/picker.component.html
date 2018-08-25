@@ -1,4 +1,9 @@
-<div (click)="onOpen()">{{ innerOption ? innerOption.text : 'select' }}</div>
+<div (click)="onOpen()"
+  class="mst-picker-current"
+  [class.mst-picker-grey]="innerOption && innerOption.color === 'grey'"
+  [class.mst-picker-green]="innerOption && innerOption.color === 'green'"
+  [class.mst-picker-purple]="innerOption && innerOption.color === 'purple'"
+  >{{ innerOption ? innerOption.text : 'select' }}</div>
 
 <mst-overlay *ngIf="isShow">
   <ng-container *ngIf="isShow">

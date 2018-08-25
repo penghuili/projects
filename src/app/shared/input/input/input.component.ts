@@ -24,6 +24,7 @@ export class InputComponent extends Unsub implements OnInit, OnChanges {
   @Input() autoFocus = false;
   @Input() disabled: boolean;
   @Input() minHeight = '1.5rem';
+  @Input() hasBorder = true;
   @Output() enter = new EventEmitter<boolean>();
 
   @ViewChild('input') private inputEl: ElementRef;

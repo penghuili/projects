@@ -1,4 +1,4 @@
-<div class="mst-input-wrapper" [class.mst-input-error]="control && !control.valid">
+<div [class.mst-input-wrapper]="hasBorder" [class.mst-input-error]="control && !control.valid">
   <div #input contenteditable="true" class="mst-input"
     [style.min-height]="minHeight"
     (focus)="onFocus()"
