@@ -8,7 +8,7 @@ import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
   {
-    path: `${ROUTES.PROJECTS}/:id/:todoId`,
+    path: `${ROUTES.PROJECTS}/${ROUTES.TODOS}/:id`,
     component: TodoDetailComponent
   },
   {

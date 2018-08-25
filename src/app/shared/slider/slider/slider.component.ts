@@ -28,7 +28,7 @@ export class SliderComponent implements OnChanges, OnInit {
   @ViewChild('bar') bar: ElementRef;
   @ViewChild('thumb') thumb: ElementRef;
 
-  currentValue = this.min;
+  currentValue: number;
   left: number;
   deltaX: number;
 
@@ -36,14 +36,13 @@ export class SliderComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     this.barWidth = this.bar.nativeElement.clientWidth;
-
     this.setDefaultLeft();
+    this.currentValue = this.getValue();
 
     const hammer = new Hammer(this.thumb.nativeElement);
     hammer.on('panmove', (e) => {
       this.deltaX = e.deltaX;
       this.currentValue = this.getValue();
-      this.currentValue = this.step < 1 ? +this.currentValue.toFixed(1) : this.currentValue;
       this.valueChange.emit(this.currentValue);
     });
     hammer.on('panend', (e) => {
@@ -71,8 +70,8 @@ export class SliderComponent implements OnChanges, OnInit {
   }
   private getValue() {
     const value = ((this.getLeft() + FONT_SIZE) / this.barWidth) * (this.max - this.min);
-    const rounded = Math.round(value / this.step) * this.step;
-    return rounded + this.min;
+    const stepped = Math.round(value / this.step) * this.step + this.min;
+    return this.step < 1 ? +stepped.toFixed(1) : stepped;
   }
   private setDefaultLeft() {
     if (this.barWidth) {

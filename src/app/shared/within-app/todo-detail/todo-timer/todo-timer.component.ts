@@ -66,6 +66,7 @@ export class TodoTimerComponent implements OnChanges, OnInit {
         this.startTime = timestamp;
       }
       this.sub = interval(1000).subscribe(a => {
+        a = a + 2;
         this.progress = this.prevProgress + (a + inActiveTime) / this.expectedTime;
         this.label = this.parseSeconds(a + inActiveTime + this.usedTime);
       });

@@ -30,7 +30,7 @@
       <div class="mst-dl-item">
         <div class="mst-dl-item-title">spent time:</div>
         <div class="mst-dl-item-value">
-          {{ 10000 | secondFormatter }}
+          {{ usedTime | secondFormatter }}
         </div>
       </div>
   
@@ -64,19 +64,19 @@
       <div class="mst-dl-item">
         <div class="mst-dl-item-title">created at:</div>
         <div class="mst-dl-item-value">
-          {{ project.createdAt | mstDate:'short' }}
+          {{ project.createdAt | date:'short' }}
         </div>
       </div>
       <div class="mst-dl-item">
         <div class="mst-dl-item-title">updated at:</div>
         <div class="mst-dl-item-value">
-          {{ project.updatedAt | mstDate:'short' }}
+          {{ project.updatedAt | date:'short' }}
         </div>
       </div>
       <div class="mst-dl-item" *ngIf="project.finishedAt">
         <div class="mst-dl-item-title">finished at:</div>
         <div class="mst-dl-item-value">
-          {{ project.finishedAt | mstDate:'short' }}
+          {{ project.finishedAt | date:'short' }}
         </div>
       </div>
     </ng-container>
@@ -86,7 +86,7 @@
     </ng-container>
   </div>
 
-  <div class="mst-project-todos">
+  <div class="mst-card mst-project-todos">
     <mst-todo-item [todo]="todo" *ngFor="let todo of todos"></mst-todo-item>
 
     <div *ngIf="todos && todos.length === 0">no todos yet.</div>

@@ -31,6 +31,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   startOfEndDate: number;
   totalDays = 0;
   usedDays = 0;
+  usedTime = 0;
 
   statusOptions = projectStatusOptions;
   tabs: Tab[] = [
@@ -120,6 +121,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
         if (todos) {
           this.doneTodos = todos.filter(a => a.status === TodoStatus.Done);
           this.clearTodos = todos.filter(a => a.status === TodoStatus.Done || a.knowledge >= 0.5);
+          this.usedTime = this.todos.reduce((total, curr) => total + curr.usedTime, 0);
         }
       })
     );
@@ -127,9 +129,11 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   private updateProject() {
     this.addSubscription(
       this.shouldUpdateProject.asObservable().pipe(
-        switchMap(project => this.projectService.update(project))
+        switchMap(project => {
+          this.project = merge<Project, Partial<Project>>(project, { updatedAt: Date.now() });
+          return this.projectService.update(this.project);
+        })
       ).subscribe(success => {
-
       })
     );
   }
@@ -144,7 +148,8 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   private listenToStatusChange() {
     this.addSubscription(
       this.statusControl.value$.subscribe(option => {
-        this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value });
+        const finishedAt = option.value === ProjectStatus.WontDo || option.value === ProjectStatus.Done ? Date.now() : undefined;
+        this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value, finishedAt });
         this.shouldUpdateProject.next(this.project);
       })
     );

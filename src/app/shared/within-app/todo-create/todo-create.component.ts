@@ -15,6 +15,7 @@ import { Unsub } from '../../../static/class/unsub';
 export class TodoCreateComponent extends Unsub {
   @Input() set project(value: Project) {
     this._project = value;
+    this.currentProject = value;
     this.setDatepickerWithProject(value);
   }
   get project() {
@@ -53,8 +54,8 @@ export class TodoCreateComponent extends Unsub {
   pickHanppenDate(date: number) {
     this.happenDate = date;
   }
-  durationChange(duration: number) {
-    this.expectedTime = duration * 60;
+  expectedTimeChange(minates: number) {
+    this.expectedTime = minates * 60;
   }
   knowledgeChange(knowledge: number) {
     this.knowledge = knowledge;
@@ -69,6 +70,7 @@ export class TodoCreateComponent extends Unsub {
         projectId: this.currentProject.id,
         status: TodoStatus.Doing,
         expectedTime: this.expectedTime,
+        usedTime: 0,
         happenDate: this.happenDate,
         createdAt: timestamp,
         updatedAt: timestamp,

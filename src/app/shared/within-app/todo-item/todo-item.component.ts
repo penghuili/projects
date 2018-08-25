@@ -17,6 +17,6 @@ export class TodoItemComponent {
   constructor(private router: Router) {}
 
   goToDetail() {
-    this.router.navigateByUrl(`/${ROUTES.PROJECTS}/${this.todo.projectId}/${this.todo.id}`);
+    this.router.navigateByUrl(`/${ROUTES.PROJECTS}/${ROUTES.TODOS}/${this.todo.id}`);
   }
 }
