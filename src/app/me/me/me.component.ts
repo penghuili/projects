@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var require: any;
 const { version: appVersion } = require('../../../../package.json');
 
 @Component({
