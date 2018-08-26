@@ -1,9 +1,9 @@
 <div class="mst-start-end">
   <div class="mst-start-end-item mst-start-end-item-left">
-    <mst-datepicker [defaultDate]="defaultStartDate" (newDate)="changeStartDate($event)"></mst-datepicker>
+    <mst-datepicker [defaultDate]="defaultStartDate" [startDate]="startDate" (newDate)="changeStartDate($event)"></mst-datepicker>
   </div>
   <mst-icon [name]="'keyboard_arrow_right'"></mst-icon>
   <div class="mst-start-end-item mst-start-end-item-right">
-    <mst-datepicker [defaultDate]="defaultEndDate" (newDate)="changeEndDate($event)"></mst-datepicker>
+    <mst-datepicker [defaultDate]="defaultEndDate" [startDate]="startDate" (newDate)="changeEndDate($event)"></mst-datepicker>
   </div>
 </div>

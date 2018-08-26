@@ -51,6 +51,17 @@ export class TodoService {
       })
     );
   }
+  getFirstDate(): Observable<number> {
+    return from(
+      this.db.getInstance().todos.limit(1).first()
+    ).pipe(
+      map(todo => todo ? todo.createdAt : 0),
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(0);
+      })
+    );
+  }
 
   create(todo: Todo): Observable<number> {
     return from(

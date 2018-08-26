@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 
 import { StartDateEndDate } from '../../../model/time';
 import { startOfDay, endOfDay } from 'date-fns';
@@ -9,6 +9,7 @@ import { startOfDay, endOfDay } from 'date-fns';
   styleUrls: ['./start-date-end-date-picker.component.scss']
 })
 export class StartDateEndDatePickerComponent implements OnInit {
+  @Input() startDate = Date.now();
   @Output() newStartEnd = new EventEmitter<StartDateEndDate>();
   defaultStartDate: number;
   defaultEndDate: number;

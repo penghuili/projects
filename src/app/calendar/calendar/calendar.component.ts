@@ -14,6 +14,7 @@ import { switchMap } from 'rxjs/operators';
 export class CalendarComponent extends Unsub implements OnInit {
   undoneTodos: Todo[];
   doneTodos: Todo[];
+  startDate = Date.now();
 
   private shouldLoad = new Subject<StartDateEndDate>();
 
@@ -23,6 +24,14 @@ export class CalendarComponent extends Unsub implements OnInit {
 
   ngOnInit() {
     this.loadTodos();
+
+    this.addSubscription(
+      this.todoService.getFirstDate().subscribe(date => {
+        if (date) {
+          this.startDate = date;
+        }
+      })
+    );
   }
 
   changeDateRange(range: StartDateEndDate) {
