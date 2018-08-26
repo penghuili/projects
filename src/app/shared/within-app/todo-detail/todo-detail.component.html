@@ -7,6 +7,12 @@
   <div class="mst-card mst-padding-0-5">
     <ng-container *ngIf="activeTab === 'report'">
       <div class="mst-dl-item">
+        <div class="mst-dl-item-title">happen date:</div>
+        <div class="mst-dl-item-value">
+          <mst-datepicker [defaultDate]="todo.happenDate" (newDate)="pickHappenDate($event)"></mst-datepicker>
+        </div>
+      </div>
+      <div class="mst-dl-item">
         <div class="mst-dl-item-title">days:</div>
         <div class="mst-dl-item-value">
           {{ todo.happenDate | daysDiff }}
@@ -50,12 +56,6 @@
         <div class="mst-dl-item-title">project:</div>
         <div class="mst-dl-item-value">
           <mst-project-list [activeProject]="project" (selected)="selectProject($event)"></mst-project-list>
-        </div>
-      </div>
-      <div class="mst-dl-item">
-        <div class="mst-dl-item-title">happen date:</div>
-        <div class="mst-dl-item-value">
-          <mst-datepicker [defaultDate]="todo.happenDate" (newDate)="pickHappenDate($event)"></mst-datepicker>
         </div>
       </div>
       <div class="mst-dl-item mst-dl-item-center mst-padding-y-1-0">
