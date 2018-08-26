@@ -1,8 +1,8 @@
 <div class="mst-card mst-padding-0-5" *ngIf="project" (click)="goToDetail()">
   <div class="mst-project-item-title">{{ project.title }}</div>
   <div class="mst-project-item-date">
-    <sub>{{ project.startDate | mstDate:'short' }}</sub>
+    <sub>{{ project.startDate | mstDate:'shortDate' }}</sub>
     <sub class="mst-padding-x-0-5">-></sub>
-    <sub>{{ project.endDate | mstDate:'short' }}</sub>
+    <sub>{{ project.endDate | mstDate:'shortDate' }}</sub>
   </div>
 </div>
