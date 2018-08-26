@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ProjectService } from '../../core/services/project.service';
-import { Unsub } from '../../static/class/unsub';
 import { Project, ProjectStatus } from '../../model/project';
+import { Unsub } from '../../static/class/unsub';
+import { ROUTES } from '../../static/routes';
 
 @Component({
   selector: 'mst-achieved',
@@ -14,7 +16,9 @@ export class AchievedComponent extends Unsub implements OnInit {
 
   ProjectStaus = ProjectStatus;
 
-  constructor(private projectService: ProjectService) {
+  constructor(
+    private projectService: ProjectService,
+    private router: Router) {
     super();
   }
 
@@ -24,6 +28,10 @@ export class AchievedComponent extends Unsub implements OnInit {
         this.projects = projects;
       })
     );
+  }
+
+  goToDetail(id: number) {
+    this.router.navigateByUrl(`/${ROUTES.PROJECTS}/${id}`);
   }
 
 }

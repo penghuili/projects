@@ -4,7 +4,8 @@
   [reverse]="true"
   [id]="p.id">
   <div [class.mst-grey]="p.status === ProjectStaus.WontDo"
-    [class.mst-green]="p.status === ProjectStaus.Done">{{ p.title }}</div>
+    [class.mst-green]="p.status === ProjectStaus.Done"
+    (click)="goToDetail(p.id)">{{ p.title }}</div>
 </mst-timeline-item>
 
 <div *ngIf="projects && projects.length === 0">no projects done.</div>
