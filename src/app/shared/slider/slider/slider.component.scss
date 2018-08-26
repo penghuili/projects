@@ -1,5 +1,11 @@
 @import '../../../static/variables';
 
+.mst-slider-wrapper {
+  height: 3.5rem;
+  padding-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
 .mst-slider-bar {
   position: relative;
   width: 100%;

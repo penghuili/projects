@@ -1,10 +1,12 @@
-<div class="mst-slider-bar" #bar>
-  <div class="mst-slider-active" [style.width.px]="getWidth()"></div>
-  <div class="mst-slider-thumb" [style.left.px]="getLeft()" #thumb>
-    <div class="mst-slider-thumb-value">{{currentValue}}</div>
+<div class="mst-slider-wrapper">
+  <div class="mst-slider-bar" #bar>
+    <div class="mst-slider-active" [style.width.px]="getWidth()"></div>
+    <div class="mst-slider-thumb" [style.left.px]="getLeft()" #thumb>
+      <div class="mst-slider-thumb-value">{{currentValue}}</div>
+    </div>
   </div>
-</div>
-<div class="mst-slider-range">
-  <div class="mst-slider-range-left">{{ min }}</div>
-  <div class="mst-slider-range-right">{{ max }}</div>
+  <div class="mst-slider-range">
+    <div class="mst-slider-range-left">{{ min }}</div>
+    <div class="mst-slider-range-right">{{ max }}</div>
+  </div>
 </div>

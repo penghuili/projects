@@ -19,14 +19,14 @@
         </div>
       </div>
   
-      <div class="mst-dl-item mst-dl-item-center mst-padding-y-1-0">
+      <div class="mst-dl-item mst-dl-item-center mst-padding-0">
         <div class="mst-dl-item-title">knowledge:</div>
         <div class="mst-dl-item-value">
           <mst-knowledge-slider [defaultKnowledge]="defaultKnowledge" (newKnowledge)="updateKnowledge($event)"></mst-knowledge-slider>
         </div>
       </div>
 
-      <div class="mst-dl-item mst-dl-item-center" *ngIf="todo.expectedTime">
+      <div class="mst-dl-item mst-dl-item-center mst-padding-0" *ngIf="todo.expectedTime">
         <div class="mst-dl-item-title">spent time:</div>
         <div class="mst-dl-item-value">
           <mst-todo-timer
@@ -58,7 +58,7 @@
           <mst-project-list [activeProject]="project" (selected)="selectProject($event)"></mst-project-list>
         </div>
       </div>
-      <div class="mst-dl-item mst-dl-item-center mst-padding-y-1-0">
+      <div class="mst-dl-item mst-dl-item-center mst-padding-0">
         <div class="mst-dl-item-title">expected time:</div>
         <div class="mst-dl-item-value">
           <mst-slider [min]="0" [max]="60" [step]="1" [defaultValue]="defaultExpectedTime" (valueChange)="expectedTimeChange($event)"></mst-slider>

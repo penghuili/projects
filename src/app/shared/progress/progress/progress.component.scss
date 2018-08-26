@@ -1,5 +1,10 @@
 @import '../../../static/variables';
 
+.mst-progress-wrapper {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
 .mst-progress-bar {
   position: relative;
   width: 100%;

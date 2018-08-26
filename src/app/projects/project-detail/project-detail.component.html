@@ -6,21 +6,21 @@
 
   <div class="mst-card mst-padding-0-5 mst-padding-top-1-0">
     <ng-container *ngIf="activeTab === 'report'">
-      <div class="mst-dl-item mst-dl-item-center" *ngIf="todos && todos.length > 0">
+      <div class="mst-dl-item mst-dl-item-center mst-padding-0" *ngIf="todos && todos.length > 0">
         <div class="mst-dl-item-title">clear todos:</div>
         <div class="mst-dl-item-value">
           <mst-progress [progress]="clearTodos.length / todos.length" [label]="clearTodos.length" [endLabel]="todos.length"></mst-progress>
         </div>
       </div>
   
-      <div class="mst-dl-item mst-dl-item-center" *ngIf="todos && todos.length > 0">
+      <div class="mst-dl-item mst-dl-item-center mst-padding-0" *ngIf="todos && todos.length > 0">
         <div class="mst-dl-item-title">done todos:</div>
         <div class="mst-dl-item-value">
           <mst-progress [progress]="doneTodos.length / todos.length" [label]="doneTodos.length" [endLabel]="todos.length"></mst-progress>
         </div>
       </div>
   
-      <div class="mst-dl-item mst-dl-item-center">
+      <div class="mst-dl-item mst-dl-item-center mst-padding-0">
         <div class="mst-dl-item-title">days:</div>
         <div class="mst-dl-item-value">
           <mst-progress [progress]="usedDays / totalDays" [label]="usedDays" [endLabel]="totalDays"></mst-progress>
