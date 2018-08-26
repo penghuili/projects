@@ -75,7 +75,7 @@ export class SliderComponent implements OnChanges, OnInit {
   }
   private setDefaultLeft() {
     if (this.barWidth) {
-      this.left = Math.round(this.defaultValue / this.max * this.barWidth) - FONT_SIZE / 2;
+      this.left = Math.round(this.defaultValue / this.max * this.barWidth) - FONT_SIZE;
       this.deltaX = 0;
     }
   }
