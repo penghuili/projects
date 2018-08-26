@@ -3,14 +3,11 @@
   justify-content: flex-start;
   align-items: center;
 }
-.mst-start-end-item {
-  width: 5rem;
-}
 .mst-start-end-item-left {
-  text-align: left;
+  padding-right: 2rem;
 }
 .mst-start-end-item-right {
-  text-align: right;
+  padding-left: 2rem;
 }
 .mst-start-end-days {
   padding-left: 2rem;
