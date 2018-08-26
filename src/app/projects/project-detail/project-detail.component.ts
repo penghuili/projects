@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addDays, differenceInCalendarDays } from 'date-fns';
-import { Subject, BehaviorSubject } from 'rxjs';
-import {merge} from 'ramda';
+import { merge } from 'ramda';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
+
 import { ProjectService } from '../../core/services/project.service';
 import { TodoService } from '../../core/services/todo.service';
 import { InputControl } from '../../model/input-control';
 import { PickerOption } from '../../model/picker';
-import { Project, projectStatusOptions, ProjectStatus } from '../../model/project';
+import { Project, ProjectStatus, projectStatusOptions } from '../../model/project';
 import { Tab } from '../../model/tab';
 import { Todo, TodoStatus } from '../../model/todo';
 import { Unsub } from '../../static/class/unsub';
-import { switchMap, debounceTime, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'mst-project-detail',
@@ -34,6 +35,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   usedDays = 0;
   usedTime = 0;
   showStatusError = false;
+  canAddTodo = true;
 
   statusOptions = projectStatusOptions;
   tabs: Tab[] = [
@@ -138,6 +140,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
           this.undoneTodos = todos.filter(a => a.status === TodoStatus.Doing);
           this.clearTodos = todos.filter(a => a.status === TodoStatus.Done || a.knowledge >= 0.5);
           this.usedTime = this.todos.reduce((total, curr) => total + curr.usedTime, 0);
+          this.canAddTodo = this.todos.length < 20;
         }
       })
     );

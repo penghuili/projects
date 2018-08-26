@@ -1,0 +1,17 @@
+@import '../../../static/variables';
+
+.mst-notification {
+  position: fixed;
+  top: 3.5rem;
+  right: 1rem;
+  max-width: 40%;
+
+  padding: 0.5rem;
+  background-color: $primary;
+  color: $white;
+}
+@media screen and (min-width: $break-point) {
+  .mst-notification {
+    right: calc(50% - 284px + 1rem);
+  }
+}

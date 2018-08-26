@@ -95,6 +95,7 @@
   </div>
 
   <div class="mst-card mst-project-todos">
+    <div class="mst-padding-0-5 mst-purple" *ngIf="!canAddTodo">project can have at most 20 todos. try to create new projects.</div>
     <mst-todo-item [todo]="todo" *ngFor="let todo of undoneTodos"></mst-todo-item>
     <mst-todo-item [todo]="todo" *ngFor="let todo of doneTodos"></mst-todo-item>
 
@@ -102,4 +103,4 @@
   </div>
 </div>
 
-<mst-todo-create [project]="project" (created)="createdTodo()"></mst-todo-create>
+<mst-todo-create [project]="project" (created)="createdTodo()" *ngIf="canAddTodo"></mst-todo-create>
