@@ -27,8 +27,9 @@ export class ProjectService {
     return from(
       this.db.getInstance().projects
       .filter(a => a.status === ProjectStatus.Done || a.status === ProjectStatus.WontDo)
-      .toArray()
+      .sortBy('finishedAt')
     ).pipe(
+      map(projects => projects ? projects.reverse() : projects),
       catchError(error => {
         alert(JSON.stringify(error));
         return of(null);
