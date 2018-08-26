@@ -4,6 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { Todo } from '../../model/todo';
 import { DbService } from './db.service';
+import { StartDateEndDate } from '../../model/time';
 
 @Injectable()
 export class TodoService {
@@ -28,6 +29,21 @@ export class TodoService {
       .where('id')
       .equals(id)
       .first()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
+  }
+  getByDateRange(range: StartDateEndDate): Observable<Todo[]> {
+    return from(
+      this.db.getInstance().todos
+      .where('happenDate')
+      .between(range.start, range.end)
+      .or('finishedAt')
+      .between(range.start, range.end)
+      .toArray()
     ).pipe(
       catchError(error => {
         alert(JSON.stringify(error));

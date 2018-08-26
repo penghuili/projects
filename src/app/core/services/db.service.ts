@@ -13,6 +13,9 @@ class MonsterDB extends Dexie {
       todos: '++id,projectId,happenDate,expectedTime,status',
       projects: '++id,status,startDate,endDate',
     });
+    this.version(2).stores({
+      todos: '++id,projectId,happenDate,finishedAt,expectedTime,status'
+    });
   }
 }
 

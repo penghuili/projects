@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { addMonths, endOfDay, getDaysInMonth, setDate, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, endOfDay, getDaysInMonth, setDate, startOfDay, startOfMonth, getYear, getMonth, setYear, setMonth, setDay } from 'date-fns';
 
 import { isWithin } from '../../../../model/time';
 
@@ -51,7 +51,10 @@ export class DatepickerMonthComponent implements OnChanges {
     this.createRows();
   }
   onSelectDate(day: number) {
-    this.selectDate.emit(setDate(this.oneDayOfCurrentMonth, day).getTime());
+    const year = getYear(this.oneDayOfCurrentMonth);
+    const month = getMonth(this.oneDayOfCurrentMonth);
+    const selected = setDate(setMonth(setYear(Date.now(), year), month), day).getTime();
+    this.selectDate.emit(selected);
   }
 
   private isSelected(day: number): boolean {

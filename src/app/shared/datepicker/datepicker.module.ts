@@ -10,6 +10,7 @@ import { DatepickerMonthComponent } from './datepicker/datepicker-month/datepick
 import { DatepickerTitleComponent } from './datepicker/datepicker-title/datepicker-title.component';
 import { DatepickerYearListComponent } from './datepicker/datepicker-year-list/datepicker-year-list.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { StartDateEndDatePickerComponent } from './start-date-end-date-picker/start-date-end-date-picker.component';
 
 @NgModule({
   imports: [
@@ -24,10 +25,12 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     DatepickerTitleComponent,
     DatepickerYearListComponent,
     DatepickerMonthComponent,
-    DatepickerMonthRowComponent
+    DatepickerMonthRowComponent,
+    StartDateEndDatePickerComponent
   ],
   exports: [
-    DatepickerComponent
+    DatepickerComponent,
+    StartDateEndDatePickerComponent
   ]
 })
 export class DatepickerModule { }

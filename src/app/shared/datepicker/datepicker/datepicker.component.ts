@@ -43,6 +43,7 @@ export class DatepickerComponent {
     this.innerDate = date;
   }
   onFinish() {
+    this.outerDate = this.innerDate;
     this.newDate.emit(this.innerDate);
     this.isShowDatepicker = false;
   }

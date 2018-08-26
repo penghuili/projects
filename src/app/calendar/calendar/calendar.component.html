@@ -1,1 +1,13 @@
-<div>calendar coming soon ...</div>
+<mst-start-date-end-date-picker (newStartEnd)="changeDateRange($event)"></mst-start-date-end-date-picker>
+
+<div class="mst-card mst-margin-top-2-0" *ngIf="undoneTodos">
+  <mst-todo-item *ngFor="let todo of undoneTodos" [todo]="todo"></mst-todo-item>
+  <div class="mst-padding-0-5" *ngIf="undoneTodos.length === 0">nothing planned.</div>
+</div>
+
+<ng-container *ngIf="doneTodos && doneTodos.length > 0">
+  <div class="mst-calendar-done-title">done</div>
+  <div class="mst-card">
+    <mst-todo-item *ngFor="let todo of doneTodos" [todo]="todo"></mst-todo-item>
+  </div>
+</ng-container>
