@@ -6,5 +6,9 @@
   <div class="mst-start-end-item-right">
     <mst-datepicker [defaultDate]="defaultEndDate" [startDate]="startDate" (newDate)="changeEndDate($event)"></mst-datepicker>
   </div>
-  <div class="mst-start-end-days">{{ days }} days</div>
+  <div class="mst-start-end-days" *ngIf="days">
+    {{ days }}
+    <ng-container *ngIf="days === 1">day</ng-container>
+    <ng-container *ngIf="days > 1">days</ng-container>
+  </div>
 </div>
