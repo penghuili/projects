@@ -95,7 +95,8 @@
   </div>
 
   <div class="mst-card mst-project-todos">
-    <mst-todo-item [todo]="todo" *ngFor="let todo of todos"></mst-todo-item>
+    <mst-todo-item [todo]="todo" *ngFor="let todo of undoneTodos"></mst-todo-item>
+    <mst-todo-item [todo]="todo" *ngFor="let todo of doneTodos"></mst-todo-item>
 
     <div *ngIf="todos && todos.length === 0">no todos yet.</div>
   </div>

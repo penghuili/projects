@@ -21,9 +21,9 @@ import { switchMap, debounceTime, filter } from 'rxjs/operators';
 export class ProjectDetailComponent extends Unsub implements OnInit {
   project: Project;
   todos: Todo[];
+  undoneTodos: Todo[];
   doneTodos: Todo[];
   clearTodos: Todo[];
-  hasUndoneTodo: boolean;
   titleControl = new InputControl<string>({ required: true });
   statusControl = new InputControl<PickerOption>({ required: true });
   goalControl = new InputControl<string>({ required: true });
@@ -135,9 +135,9 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
         this.todos = todos;
         if (todos) {
           this.doneTodos = todos.filter(a => a.status === TodoStatus.Done);
+          this.undoneTodos = todos.filter(a => a.status === TodoStatus.Doing);
           this.clearTodos = todos.filter(a => a.status === TodoStatus.Done || a.knowledge >= 0.5);
           this.usedTime = this.todos.reduce((total, curr) => total + curr.usedTime, 0);
-          this.hasUndoneTodo = this.todos.length > this.doneTodos.length;
         }
       })
     );
@@ -164,7 +164,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   private listenToStatusChange() {
     this.addSubscription(
       this.statusControl.value$.pipe(filter(a => !!a)).subscribe(option => {
-        if ((option.value === ProjectStatus.Done || option.value === ProjectStatus.WontDo) && this.hasUndoneTodo) {
+        if ((option.value === ProjectStatus.Done || option.value === ProjectStatus.WontDo) && this.undoneTodos && this.undoneTodos.length > 0) {
           this.showStatusError = true;
           this.statusControl.setValue(this.statusOptions.find(a => a.value === this.project.status), {emitEvent: false});
         } else {
