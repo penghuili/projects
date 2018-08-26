@@ -2,9 +2,13 @@
   <mst-project-item [project]="p"></mst-project-item>
 </div>
 
-<div class="mst-projects-inactive" *ngIf="inactiveProjects && inactiveProjects.length > 0">Inactive Projects</div>
-<div class="mst-projects-item-wrapper" *ngFor="let p of inactiveProjects">
-  <mst-project-item [project]="p"></mst-project-item>
+<div class="mst-projects-inactive" *ngIf="inactiveProjects && inactiveProjects.length > 0">
+  inactive
+</div>
+<div class="mst-projects">
+  <div class="mst-projects-item-wrapper" *ngFor="let p of inactiveProjects">
+    <mst-project-item [project]="p"></mst-project-item>
+  </div>
 </div>
 
 <div *ngIf="(!activeProjects || activeProjects.length === 0) && (!inactiveProjects || inactiveProjects.length === 0)">

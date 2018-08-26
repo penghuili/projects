@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ButtonModule } from '../shared/button/button.module';
 import { MonsterCommonModule } from '../shared/common/common.module';
 import { DatepickerModule } from '../shared/datepicker/datepicker.module';
+import { IconModule } from '../shared/icon/icon.module';
 import { InputModule } from '../shared/input/input.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { ProgressModule } from '../shared/progress/progress.module';
@@ -23,7 +24,8 @@ import { ProjectsComponent } from './projects/projects.component';
     PipesModule,
     MonsterCommonModule,
     DatepickerModule,
-    WithinAppModule
+    WithinAppModule,
+    IconModule
   ],
   declarations: [
     ProjectsComponent,

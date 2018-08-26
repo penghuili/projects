@@ -38,6 +38,7 @@
         <div class="mst-dl-item-title">status:</div>
         <div class="mst-dl-item-value">
           <mst-picker [control]="statusControl" [options]="statusOptions"></mst-picker>
+          <div class="mst-error" *ngIf="showStatusError">you have unfinished todos.</div>
         </div>
       </div>
     </ng-container>

@@ -1,9 +1,13 @@
+.mst-projects {
+  display: flex;
+  flex-wrap: wrap;
+}
 .mst-projects-item-wrapper {
-  padding-bottom: 0.5rem;
+  padding: 0.25rem;
+  width: 50%;
 }
 .mst-projects-inactive {
   padding: 2rem 0 0.5rem;
   
-  font-size: 1.25rem;
   text-align: center;
 }

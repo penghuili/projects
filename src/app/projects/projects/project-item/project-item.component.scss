@@ -7,6 +7,10 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.mst-project-item-progress {
-  padding-right: 3rem;
+.mst-project-item-date {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-bottom: 1rem;
 }

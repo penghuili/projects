@@ -23,6 +23,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   todos: Todo[];
   doneTodos: Todo[];
   clearTodos: Todo[];
+  hasUndoneTodo: boolean;
   titleControl = new InputControl<string>({ required: true });
   statusControl = new InputControl<PickerOption>({ required: true });
   goalControl = new InputControl<string>({ required: true });
@@ -32,6 +33,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   totalDays = 0;
   usedDays = 0;
   usedTime = 0;
+  showStatusError = false;
 
   statusOptions = projectStatusOptions;
   tabs: Tab[] = [
@@ -135,6 +137,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
           this.doneTodos = todos.filter(a => a.status === TodoStatus.Done);
           this.clearTodos = todos.filter(a => a.status === TodoStatus.Done || a.knowledge >= 0.5);
           this.usedTime = this.todos.reduce((total, curr) => total + curr.usedTime, 0);
+          this.hasUndoneTodo = this.todos.length > this.doneTodos.length;
         }
       })
     );
@@ -161,9 +164,15 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   private listenToStatusChange() {
     this.addSubscription(
       this.statusControl.value$.pipe(filter(a => !!a)).subscribe(option => {
-        const finishedAt = option.value === ProjectStatus.WontDo || option.value === ProjectStatus.Done ? Date.now() : undefined;
-        this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value, finishedAt });
-        this.shouldUpdateProject.next(this.project);
+        if ((option.value === ProjectStatus.Done || option.value === ProjectStatus.WontDo) && this.hasUndoneTodo) {
+          this.showStatusError = true;
+          this.statusControl.setValue(this.statusOptions.find(a => a.value === this.project.status), {emitEvent: false});
+        } else {
+          this.showStatusError = false;
+          const finishedAt = option.value === ProjectStatus.WontDo || option.value === ProjectStatus.Done ? Date.now() : undefined;
+          this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value, finishedAt });
+          this.shouldUpdateProject.next(this.project);
+        }
       })
     );
   }
