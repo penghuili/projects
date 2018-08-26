@@ -1,5 +1,7 @@
-<div class="mst-projects-item-wrapper" *ngFor="let p of activeProjects">
-  <mst-project-item [project]="p"></mst-project-item>
+<div class="mst-projects">
+  <div class="mst-projects-item-wrapper" *ngFor="let p of activeProjects">
+    <mst-project-item [project]="p"></mst-project-item>
+  </div>
 </div>
 
 <div class="mst-projects-inactive" *ngIf="inactiveProjects && inactiveProjects.length > 0">
