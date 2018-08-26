@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 
 import { StartDateEndDate } from '../../../model/time';
-import { startOfDay, endOfDay } from 'date-fns';
+import { startOfDay, endOfDay, differenceInCalendarDays } from 'date-fns';
 
 @Component({
   selector: 'mst-start-date-end-date-picker',
@@ -13,6 +13,7 @@ export class StartDateEndDatePickerComponent implements OnInit {
   @Output() newStartEnd = new EventEmitter<StartDateEndDate>();
   defaultStartDate: number;
   defaultEndDate: number;
+  days = 1;
 
   private start: number;
   private end: number;
@@ -46,6 +47,7 @@ export class StartDateEndDatePickerComponent implements OnInit {
   }
 
   private formatStartEnd(): StartDateEndDate {
+    this.days = differenceInCalendarDays(this.end, this.start) + 1;
     const start = startOfDay(this.start).getTime();
     const end = endOfDay(this.end).getTime();
     return {start, end}
