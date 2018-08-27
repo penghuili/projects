@@ -181,7 +181,10 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   }
   private listenToGoalChange() {
     this.addSubscription(
-      this.goalControl.value$.pipe(debounceTime(500)).subscribe(goal => {
+      this.goalControl.value$.pipe(
+        debounceTime(500),
+        filter(a => !!a)
+      ).subscribe(goal => {
         this.project = merge<Project, Partial<Project>>(this.project, { goal });
         this.shouldUpdateProject.next(this.project);
       })

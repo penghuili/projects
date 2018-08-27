@@ -56,7 +56,7 @@
           <mst-datepicker [defaultDate]="endDate" [startDate]="startOfEndDate" (newDate)="pickEndDate($event)"></mst-datepicker>
         </div>
       </div>
-      <div class="mst-dl-item" *ngIf="project.goal">
+      <div class="mst-dl-item">
         <div class="mst-dl-item-title">goal:</div>
         <div class="mst-dl-item-value">
           <mst-input [control]="goalControl" [hasBorder]="false"></mst-input>
