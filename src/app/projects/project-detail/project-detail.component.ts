@@ -85,11 +85,13 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
       this.endDate = addDays(this.startDate, 1).getTime();
     }
     this.project = merge<Project, Partial<Project>>(this.project, { startDate: this.startDate, endDate: this.endDate });
+    this.calcDays(this.project);
     this.shouldUpdateProject.next(this.project);
   }
   pickEndDate(date: number) {
     this.endDate = date;
     this.project = merge<Project, Partial<Project>>(this.project, { endDate: this.endDate });
+    this.calcDays(this.project);
     this.shouldUpdateProject.next(this.project);
   }
   createdTodo() {
@@ -123,11 +125,14 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
           this.endDate = this.project.endDate;
           this.startOfEndDate = addDays(this.startDate, 1).getTime();
 
-          this.totalDays = differenceInCalendarDays(this.project.endDate, this.project.startDate) + 1;
-          this.usedDays = Math.max(differenceInCalendarDays(this.project.finishedAt || Date.now(), this.project.startDate), 0);
+          this.calcDays(this.project);
         }
       })
     );
+  }
+  private calcDays(project: Project) {
+    this.totalDays = differenceInCalendarDays(project.endDate, project.startDate) + 1;
+    this.usedDays = Math.max(differenceInCalendarDays(project.finishedAt || Date.now(), project.startDate), 0);
   }
   private getTodos(id: number) {
     this.addSubscription(
