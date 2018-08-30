@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { StartDateEndDate } from '../../../model/time';
 import { startOfDay, endOfDay, differenceInCalendarDays } from 'date-fns';
@@ -8,24 +8,24 @@ import { startOfDay, endOfDay, differenceInCalendarDays } from 'date-fns';
   templateUrl: './start-date-end-date-picker.component.html',
   styleUrls: ['./start-date-end-date-picker.component.scss']
 })
-export class StartDateEndDatePickerComponent implements OnInit {
+export class StartDateEndDatePickerComponent implements OnChanges {
   @Input() startDate = Date.now();
+  @Input() defaultStartDate = Date.now();
+  @Input() defaultEndDate = Date.now();
   @Output() newStartEnd = new EventEmitter<StartDateEndDate>();
-  defaultStartDate: number;
-  defaultEndDate: number;
   days = 1;
 
-  private start: number;
-  private end: number;
+  private start = Date.now();
+  private end = Date.now();
   constructor() { }
 
-  ngOnInit() {
-    const now = Date.now();
-    this.defaultStartDate = now;;
-    this.start = now;
-    this.defaultEndDate = now;
-    this.end = now;
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.defaultStartDate) {
+      this.start = this.defaultStartDate;
+    }
+    if (changes.defaultEndDate) {
+      this.end = this.defaultEndDate;
+    }
     this.newStartEnd.emit(this.formatStartEnd());
   }
 

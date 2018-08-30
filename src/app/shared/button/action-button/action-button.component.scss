@@ -2,7 +2,7 @@
 
 $order-button-width: 19rem;
 
-.gm-action-button-plus {
+.mst-action-button-plus {
   position: fixed;
   right: 1rem;
   bottom: 4rem;
@@ -26,14 +26,17 @@ $order-button-width: 19rem;
   user-select: none;
   cursor: default;
 }
-.gm-action-button-plus--show {
+.mst-action-button-plus:focus {
+  outline: none;
+}
+.mst-action-button-plus--show {
   transform: scale(1);
 }
-.gm-action-button-plus--rotate {
+.mst-action-button-plus--rotate {
   transform: rotate(-45deg);
 }
 
-.gm-action-button-overlay {
+.mst-action-button-overlay {
   position: fixed;
   height: 100vh;
   width: $order-button-width + 1rem;
@@ -41,11 +44,11 @@ $order-button-width: 19rem;
   bottom: 0;
   transition: all 130ms ease-in;
 }
-.gm-action-button-overlay--show {
+.mst-action-button-overlay--show {
   width: 100vw;
   right: 0;
 }
-.gm-action-buttons-wrapper {
+.mst-action-buttons-wrapper {
   position: absolute;
   bottom: 5rem;
   right: 2rem;
@@ -56,12 +59,12 @@ $order-button-width: 19rem;
   transform-origin: right bottom;
   transition: all 300ms ease-in-out;
 }
-.gm-action-buttons-wrapper--show {
+.mst-action-buttons-wrapper--show {
   transform: skewX(0);
 }
 
 @media screen and (min-width: $break-point) {
-  .gm-action-button-plus {
+  .mst-action-button-plus {
     right: calc(50% - 230px);
   }
 }

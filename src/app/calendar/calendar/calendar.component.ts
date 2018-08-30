@@ -5,7 +5,8 @@ import { StartDateEndDate } from '../../model/time';
 import { Unsub } from '../../static/class/unsub';
 import { Todo, TodoStatus } from '../../model/todo';
 import { Subject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, max } from 'rxjs/operators';
+import { subDays } from 'date-fns';
 
 @Component({
   templateUrl: './calendar.component.html',
@@ -15,6 +16,7 @@ export class CalendarComponent extends Unsub implements OnInit {
   undoneTodos: Todo[];
   doneTodos: Todo[];
   startDate = Date.now();
+  defaultStart = Date.now();
 
   private shouldLoad = new Subject<StartDateEndDate>();
 
@@ -29,6 +31,7 @@ export class CalendarComponent extends Unsub implements OnInit {
       this.todoService.getFirstDate().subscribe(date => {
         if (date) {
           this.startDate = date;
+          this.defaultStart = Math.max(date, subDays(Date.now(), 7).getTime());
         }
       })
     );

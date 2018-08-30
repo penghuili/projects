@@ -1,4 +1,7 @@
-<mst-start-date-end-date-picker [startDate]="startDate" (newStartEnd)="changeDateRange($event)"></mst-start-date-end-date-picker>
+<mst-start-date-end-date-picker
+  [defaultStartDate]="defaultStart"
+  [startDate]="startDate"
+  (newStartEnd)="changeDateRange($event)"></mst-start-date-end-date-picker>
 
 <div class="mst-card mst-margin-top-2-0" *ngIf="undoneTodos">
   <mst-todo-item *ngFor="let todo of undoneTodos" [todo]="todo"></mst-todo-item>

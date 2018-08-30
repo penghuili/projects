@@ -1,13 +1,13 @@
-<button class="gm-button gm-action-button-plus"
-  [class.gm-action-button-plus--show]="showPlus"
-  [class.gm-action-button-plus--rotate]="showContent"
+<button class="mst-action-button-plus"
+  [class.mst-action-button-plus--show]="showPlus"
+  [class.mst-action-button-plus--rotate]="showContent"
   (click)="onClick()">
     +
 </button>
 
-<div class="gm-action-button-overlay" 
-  [class.gm-action-button-overlay--show]="showContent" (click)="onHideContent()">
-    <div class="gm-action-buttons-wrapper" [class.gm-action-buttons-wrapper--show]="showContent">
+<div class="mst-action-button-overlay" 
+  [class.mst-action-button-overlay--show]="showContent" (click)="onHideContent()">
+    <div class="mst-action-buttons-wrapper" [class.mst-action-buttons-wrapper--show]="showContent">
       <ng-content></ng-content>
     </div>
 </div>
