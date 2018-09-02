@@ -114,6 +114,5 @@ export class TodoCreateComponent extends Unsub {
     this.expectedTime = 0;
     this.knowledge = 0;
     this.hasProjectError = false;
-    this.currentProject = null;
   }
 }
