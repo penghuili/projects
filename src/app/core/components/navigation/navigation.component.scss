@@ -10,17 +10,19 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 0.5rem;
   height: 3rem;
 
   background-color: $white;
   border-top: 1px solid $grey;
 }
-.mst-navigation-icon-right {
-  display: inline-block;
-}
-.mst-navigation-icon-down {
-  display: none;
+.mst-navigation-achieved {
+  height: 2rem;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid $yellow;
 }
 @media screen and (min-width: $break-point) {
   .mst-navigation {
@@ -36,13 +38,6 @@
     border: 0;
   }
   mst-link {
-    height: 2rem;
-  }
-  .mst-navigation-icon-right {
-    display: none;
-  }
-  .mst-navigation-icon-down {
-    display: inline-block;
     height: 2rem;
   }
 }

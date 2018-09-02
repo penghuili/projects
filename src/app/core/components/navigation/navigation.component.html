@@ -3,7 +3,9 @@
 
   <mst-link [route]="routes.CALENDAR">calendar</mst-link>
 
-  <mst-link [route]="routes.ACHIEVED">achieved</mst-link>
+  <div [class.mst-navigation-achieved]="isAchievedHighlighted" (click)="goToAchieved()">
+    <mst-link [route]="routes.ACHIEVED">achieved</mst-link>
+  </div>
   
   <mst-link [route]="routes.ME">me</mst-link>
 </div>
