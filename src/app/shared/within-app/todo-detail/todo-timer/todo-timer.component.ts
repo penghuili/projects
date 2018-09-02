@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { fromEvent, interval, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewEncapsulation } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 
 import { add0 } from '../../../../model/time';
 
@@ -10,7 +9,7 @@ import { add0 } from '../../../../model/time';
   styleUrls: ['./todo-timer.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class TodoTimerComponent implements OnChanges, OnInit {
+export class TodoTimerComponent implements OnChanges {
   @Input() expectedTime: number;
   @Input() usedTime: number;
   @Output() newTime = new EventEmitter<number>();
@@ -24,13 +23,6 @@ export class TodoTimerComponent implements OnChanges, OnInit {
   private sub: Subscription;
   private startTime: number;
 
-  ngOnInit() {
-    fromEvent(window, 'focus').pipe(
-      filter(() => this.isDoing)
-    ).subscribe(() => {
-      this.start();
-    });
-  }
   ngOnChanges() {
     if (this.expectedTime && this.usedTime !== undefined) {
       this.expectedTime = this.expectedTime;
@@ -53,22 +45,10 @@ export class TodoTimerComponent implements OnChanges, OnInit {
   private start() {
     if (this.expectedTime) {
       this.isDoing = true;
-      if (this.sub) {
-        this.sub.unsubscribe();
-      }
-      let inActiveTime: number;
-      const timestamp = Date.now();
-      if (!this.startTime) {
-        inActiveTime = 0;
-        this.startTime = timestamp;
-      } else {
-        inActiveTime = Math.round((timestamp - this.startTime) / 1000);
-        this.startTime = timestamp;
-      }
       this.sub = interval(1000).subscribe(a => {
         a = a + 2;
-        this.progress = this.prevProgress + (a + inActiveTime) / this.expectedTime;
-        this.label = this.parseSeconds(a + inActiveTime + this.usedTime);
+        this.progress = this.prevProgress + a / this.expectedTime;
+        this.label = this.parseSeconds(a + this.usedTime);
       });
     }
   }
