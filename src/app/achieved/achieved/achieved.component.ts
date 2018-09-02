@@ -5,6 +5,8 @@ import { ProjectService } from '../../core/services/project.service';
 import { Project, ProjectStatus } from '../../model/project';
 import { Unsub } from '../../static/class/unsub';
 import { ROUTES } from '../../static/routes';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'mst-achieved',
@@ -16,6 +18,8 @@ export class AchievedComponent extends Unsub implements OnInit {
 
   ProjectStaus = ProjectStatus;
 
+  private shouldLoad = new BehaviorSubject<boolean>(true);
+
   constructor(
     private projectService: ProjectService,
     private router: Router) {
@@ -24,7 +28,9 @@ export class AchievedComponent extends Unsub implements OnInit {
 
   ngOnInit() {
     this.addSubscription(
-      this.projectService.getFinished().subscribe(projects => {
+      this.shouldLoad.asObservable().pipe(
+        switchMap(() => this.projectService.getFinished())
+      ).subscribe(projects => {
         this.projects = projects;
       })
     );
@@ -32,6 +38,9 @@ export class AchievedComponent extends Unsub implements OnInit {
 
   goToDetail(id: number) {
     this.router.navigateByUrl(`/${ROUTES.PROJECTS}/${id}`);
+  }
+  reload() {
+    this.shouldLoad.next(true);
   }
 
 }

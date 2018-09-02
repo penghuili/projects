@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { ButtonModule } from '../shared/button/button.module';
 import { MonsterCommonModule } from '../shared/common/common.module';
+import { InputModule } from '../shared/input/input.module';
+import { AchievedCreateComponent } from './achieved-create/achieved-create.component';
 import { AchievedRoutingModule } from './achieved-routing.module';
 import { AchievedComponent } from './achieved/achieved.component';
 
@@ -9,8 +12,10 @@ import { AchievedComponent } from './achieved/achieved.component';
   imports: [
     CommonModule,
     AchievedRoutingModule,
-    MonsterCommonModule
+    MonsterCommonModule,
+    ButtonModule,
+    InputModule
   ],
-  declarations: [AchievedComponent]
+  declarations: [AchievedComponent, AchievedCreateComponent]
 })
 export class AchievedModule { }

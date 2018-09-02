@@ -1,0 +1,20 @@
+<mst-action-button [showPlus]="true" (clicked)="open()"></mst-action-button>
+
+<mst-overlay *ngIf="isShow">
+  <ng-container *ngIf="isShow">
+    <mst-input
+      [control]="titleControl"
+      [autoFocus]="true"></mst-input>
+    
+    <div class="mst-margin-top-0-5">
+      goal:
+      <mst-input
+        [control]="goalControl"
+        minHeight="3rem"></mst-input>
+    </div>
+  
+    <mst-cancel-confirm
+      (confirm)="create()"
+      (cancel)="onCancel()"></mst-cancel-confirm>
+  </ng-container>
+</mst-overlay>
