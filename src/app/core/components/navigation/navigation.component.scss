@@ -27,7 +27,7 @@
 @media screen and (min-width: $break-point) {
   .mst-navigation {
     width: 7rem;
-    height: auto;
+    height: 10rem;
     left: calc(50% - 284px - 9rem);
     bottom: auto;
     top: 4rem;
@@ -36,9 +36,6 @@
     align-items: flex-end;
 
     border: 0;
-  }
-  mst-link {
-    height: 2rem;
   }
 }
 @media screen and (max-width: $break-point - 1) {
