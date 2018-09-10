@@ -5,6 +5,10 @@
   <mst-tab [tabs]="tabs" [defaultTabKey]="activeTab" (newTab)="changeTab($event)"></mst-tab>
 
   <div class="mst-card mst-padding-0-5 mst-padding-top-1-0">
+    <ng-container *ngIf="activeTab === 'note'">
+      <mst-input [control]="goalControl" [hasBorder]="false"></mst-input>
+    </ng-container>
+
     <ng-container *ngIf="activeTab === 'report'">
       <div class="mst-dl-item mst-dl-item-center mst-padding-0" *ngIf="todos && todos.length > 0">
         <div class="mst-dl-item-title">clear todos:</div>
@@ -54,12 +58,6 @@
         <div class="mst-dl-item-title">end date:</div>
         <div class="mst-dl-item-value">
           <mst-datepicker [defaultDate]="endDate" [startDate]="startOfEndDate" (newDate)="pickEndDate($event)"></mst-datepicker>
-        </div>
-      </div>
-      <div class="mst-dl-item">
-        <div class="mst-dl-item-title">goal:</div>
-        <div class="mst-dl-item-value">
-          <mst-input [control]="goalControl" [hasBorder]="false"></mst-input>
         </div>
       </div>
       <div class="mst-dl-item">

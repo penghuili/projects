@@ -23,10 +23,10 @@ export class ProjectService {
       })
     );
   }
-  getFinished(): Observable<Project[]> {
+  getDone(): Observable<Project[]> {
     return from(
       this.db.getInstance().projects
-      .filter(a => a.status === ProjectStatus.Done || a.status === ProjectStatus.WontDo)
+      .filter(a => a.status === ProjectStatus.Done)
       .sortBy('finishedAt')
     ).pipe(
       map(projects => projects ? projects.reverse() : projects),

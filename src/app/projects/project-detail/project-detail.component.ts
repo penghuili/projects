@@ -40,6 +40,10 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   statusOptions = projectStatusOptions;
   tabs: Tab[] = [
     {
+      key: 'note',
+      value: 'note'
+    },
+    {
       key: 'report',
       value: 'report'
     },
@@ -52,7 +56,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
       value: 'chart'
     }
   ];
-  activeTab = 'report';
+  activeTab = 'note';
 
   private shouldUpdateProject = new Subject<Project>();
   private shouldLoadTodos = new BehaviorSubject<boolean>(true);

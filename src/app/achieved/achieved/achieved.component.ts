@@ -29,7 +29,7 @@ export class AchievedComponent extends Unsub implements OnInit {
   ngOnInit() {
     this.addSubscription(
       this.shouldLoad.asObservable().pipe(
-        switchMap(() => this.projectService.getFinished())
+        switchMap(() => this.projectService.getDone())
       ).subscribe(projects => {
         this.projects = projects;
       })
