@@ -7,7 +7,7 @@
     [class.mst-green]="p.status === ProjectStaus.Done"
     (click)="goToDetail(p.id)">{{ p.title }}</div>
   <div>
-    {{ p.goal }}
+    <mst-paragraphs [text]="p.goal"></mst-paragraphs>
   </div>
 </mst-timeline-item>
 
