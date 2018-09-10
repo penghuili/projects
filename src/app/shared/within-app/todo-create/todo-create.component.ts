@@ -30,7 +30,6 @@ export class TodoCreateComponent extends Unsub {
   noteControl = new InputControl<string>();
   happenDate = Date.now();
   expectedTime = 0;
-  knowledge = 0;
   hasProjectError = false;
 
   datepickerDefaultDate = Date.now();
@@ -57,9 +56,6 @@ export class TodoCreateComponent extends Unsub {
   expectedTimeChange(minates: number) {
     this.expectedTime = minates * 60;
   }
-  knowledgeChange(knowledge: number) {
-    this.knowledge = knowledge;
-  }
   create() {
     if (this.titleControl.valid && this.currentProject) {
       this.hasProjectError = false;
@@ -74,8 +70,7 @@ export class TodoCreateComponent extends Unsub {
         happenDate: this.happenDate,
         createdAt: timestamp,
         updatedAt: timestamp,
-        finishedAt: undefined,
-        knowledge: this.knowledge
+        finishedAt: undefined
       };
 
       this.addSubscription(
@@ -112,7 +107,6 @@ export class TodoCreateComponent extends Unsub {
     this.datepickerStartDate = this.datepickerDefaultDate;
     this.datepickerEndDate = undefined;
     this.expectedTime = 0;
-    this.knowledge = 0;
     this.hasProjectError = false;
   }
 }

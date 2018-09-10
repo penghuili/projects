@@ -24,7 +24,6 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   todos: Todo[];
   undoneTodos: Todo[];
   doneTodos: Todo[];
-  clearTodos: Todo[];
   titleControl = new InputControl<string>({ required: true });
   statusControl = new InputControl<PickerOption>({ required: true });
   goalControl = new InputControl<string>({ required: true });
@@ -36,6 +35,8 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   usedTime = 0;
   showStatusError = false;
   canAddTodo = true;
+
+  defaultClarity: number;
 
   statusOptions = projectStatusOptions;
   tabs: Tab[] = [
@@ -60,6 +61,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
 
   private shouldUpdateProject = new Subject<Project>();
   private shouldLoadTodos = new BehaviorSubject<boolean>(true);
+  private clarityEvent = new Subject<number>();
 
   constructor(
     private projectService: ProjectService,
@@ -75,12 +77,16 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.getTodos(id);
     this.updateProject();
     this.listenToTitleChange();
+    this.listenToClarityChange();
     this.listenToStatusChange();
     this.listenToGoalChange();
   }
 
   changeTab(newTabKey: string) {
     this.activeTab = newTabKey;
+  }
+  updateClarity(clarity: number) {
+    this.clarityEvent.next(clarity);
   }
   pickStartDate(date: number) {
     this.startDate = date;
@@ -125,6 +131,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
           const statusOption: PickerOption = projectStatusOptions.find(a => a.value === this.project.status);
           this.statusControl.setValue(statusOption);
       
+          this.defaultClarity = project.clarity || 0;
           this.startDate = this.project.startDate;
           this.endDate = this.project.endDate;
           this.startOfEndDate = addDays(this.startDate, 1).getTime();
@@ -147,7 +154,6 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
         if (todos) {
           this.doneTodos = todos.filter(a => a.status === TodoStatus.Done);
           this.undoneTodos = todos.filter(a => a.status === TodoStatus.Doing);
-          this.clearTodos = todos.filter(a => a.status === TodoStatus.Done || a.knowledge >= 0.5);
           this.usedTime = this.todos.reduce((total, curr) => total + curr.usedTime, 0);
           this.canAddTodo = this.todos.length < 20;
         }
@@ -169,6 +175,14 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.addSubscription(
       this.titleControl.value$.pipe(debounceTime(500)).subscribe(title => {
         this.project = merge<Project, Partial<Project>>(this.project, { title });
+        this.shouldUpdateProject.next(this.project);
+      })
+    );
+  }
+  private listenToClarityChange() {
+    this.addSubscription(
+      this.clarityEvent.asObservable().pipe(debounceTime(500)).subscribe(clarity => {
+        this.project = merge<Project, Partial<Project>>(this.project, { clarity });
         this.shouldUpdateProject.next(this.project);
       })
     );

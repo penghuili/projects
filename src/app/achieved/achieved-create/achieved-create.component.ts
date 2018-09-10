@@ -36,7 +36,8 @@ export class AchievedCreateComponent extends Unsub {
         createdAt: timestamp,
         updatedAt: timestamp,
         finishedAt: timestamp,
-        progress: 1
+        progress: 1,
+        clarity: 1,
       };
       this.addSubscription(
         this.projectService.create(newProject).subscribe(newId => {

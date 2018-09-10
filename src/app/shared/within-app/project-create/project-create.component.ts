@@ -16,6 +16,7 @@ export class ProjectCreateComponent extends Unsub {
   @Input() useActionButton = true;
   @Output() created = new EventEmitter<boolean>();
   isShow = false;
+  clarity = 0;
 
   titleControl = new InputControl<string>({ required: true });
   goalControl = new InputControl<string>({ required: true });
@@ -45,6 +46,9 @@ export class ProjectCreateComponent extends Unsub {
   pickEndDate(date: number) {
     this.defaultEndDate = date;
   }
+  clarityChange(clarity: number) {
+    this.clarity = clarity;
+  }
   create() {
     if (this.titleControl.valid && this.goalControl.valid) {
       const timestamp = Date.now();
@@ -57,7 +61,8 @@ export class ProjectCreateComponent extends Unsub {
         createdAt: timestamp,
         updatedAt: timestamp,
         finishedAt: undefined,
-        progress: 0
+        progress: 0,
+        clarity: this.clarity,
       };
       this.addSubscription(
         this.projectService.create(newProject).subscribe(newId => {

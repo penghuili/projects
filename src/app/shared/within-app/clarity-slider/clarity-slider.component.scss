@@ -1,9 +1,9 @@
-@import '../../../../static/variables';
+@import '../../../static/variables';
 
-.mst-knowledge-slider-wrapper {
+.mst-clarity-slider-wrapper {
   position: relative;
 }
-.mst-knowledge-slider-divider {
+.mst-clarity-slider-divider {
   position: absolute;
   left: 50%;
   bottom: 1.75rem;
@@ -11,7 +11,7 @@
   height: 1.5rem;
   background-color: $green;
 }
-.mst-knowledge-slider--clear .mst-slider-bar {
+.mst-clarity-slider--clear .mst-slider-bar {
   .mst-slider-active {
     background-color: $green;
   }

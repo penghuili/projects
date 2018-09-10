@@ -1,0 +1,9 @@
+<div class="mst-clarity-slider-wrapper">
+  <mst-slider
+    [class.mst-clarity-slider--clear]="clarity >= 0.5"
+    [min]="0" [max]="1" [step]="0.1"
+    [defaultValue]="defaultClarity"
+    (valueChange)="handleNewClarity($event)"></mst-slider>
+
+  <div class="mst-clarity-slider-divider"></div>
+</div>

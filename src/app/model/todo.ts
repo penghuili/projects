@@ -9,7 +9,6 @@ export interface Todo {
   projectId: number;
   note?: string;
   happenDate: number;
-  knowledge: number;
   // in seconds
   expectedTime: number;
   // in seconds

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KnowledgeSliderComponent } from './knowledge-slider.component';
+import { ClaritySliderComponent } from './clarity-slider.component';
 
-describe('KnowledgeSliderComponent', () => {
-  let component: KnowledgeSliderComponent;
-  let fixture: ComponentFixture<KnowledgeSliderComponent>;
+describe('ClaritySliderComponent', () => {
+  let component: ClaritySliderComponent;
+  let fixture: ComponentFixture<ClaritySliderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KnowledgeSliderComponent ]
+      declarations: [ ClaritySliderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KnowledgeSliderComponent);
+    fixture = TestBed.createComponent(ClaritySliderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

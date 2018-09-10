@@ -27,7 +27,6 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   statusControl = new InputControl<PickerOption>({ required: true });
   noteControl = new InputControl<string>();
 
-  defaultKnowledge: number;
   defaultExpectedTime: number;
 
   TodoStatus = TodoStatus;
@@ -44,7 +43,6 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   activeTab = 'report';
 
   private shouldUpdate = new Subject<Todo>();
-  private knowledgeEvent = new Subject<number>();
   private expectedTimeEvent = new Subject<number>();
 
   constructor(
@@ -62,7 +60,6 @@ export class TodoDetailComponent extends Unsub implements OnInit {
     this.listenToTitleChange();
     this.listenToStatusChange();
     this.listenToNoteChange();
-    this.listenToKnowledgeChange();
     this.listenToExpectedTimeChange();
   }
 
@@ -72,9 +69,6 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   selectProject(project: Project) {
     this.todo = merge<Todo, Partial<Todo>>(this.todo, { projectId: project.id });
     this.shouldUpdate.next(this.todo);
-  }
-  updateKnowledge(knowledge: number) {
-    this.knowledgeEvent.next(knowledge);
   }
   updateUsedTime(time: number) {
     this.todo = merge<Todo, Partial<Todo>>(this.todo, { usedTime: this.todo.usedTime + time });
@@ -113,7 +107,6 @@ export class TodoDetailComponent extends Unsub implements OnInit {
             this.todo = todo;
             this.titleControl.setValue(this.todo.title);
             this.noteControl.setValue(this.todo.note);
-            this.defaultKnowledge = this.todo.knowledge;
             this.defaultExpectedTime = this.todo.expectedTime / 60;
 
             return this.projectService.getById(this.todo.projectId);
@@ -164,14 +157,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
       })
     );
   }
-  private listenToKnowledgeChange() {
-    this.addSubscription(
-      this.knowledgeEvent.asObservable().pipe(debounceTime(500)).subscribe(knowledge => {
-        this.todo = merge<Todo, Partial<Todo>>(this.todo, { knowledge });
-        this.shouldUpdate.next(this.todo);
-      })
-    );
-  }
+  
   private listenToExpectedTimeChange() {
     this.addSubscription(
       this.expectedTimeEvent.asObservable().pipe(debounceTime(500)).subscribe(expectedTime => {

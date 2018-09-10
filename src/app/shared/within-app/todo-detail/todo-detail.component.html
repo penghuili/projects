@@ -6,32 +6,26 @@
 
   <div class="mst-card mst-padding-0-5">
     <ng-container *ngIf="activeTab === 'report'">
-      <div class="mst-dl-item">
-        <div class="mst-dl-item-title">happen date:</div>
-        <div class="mst-dl-item-value">
-          <mst-datepicker [defaultDate]="todo.happenDate" (newDate)="pickHappenDate($event)"></mst-datepicker>
-        </div>
-      </div>
-      <div class="mst-dl-item">
-        <div class="mst-dl-item-title">days:</div>
-        <div class="mst-dl-item-value">
-          {{ todo.happenDate | daysDiff }}
-        </div>
-      </div>
-  
       <div class="mst-dl-item mst-dl-item-center mst-padding-0">
-        <div class="mst-dl-item-title">knowledge:</div>
+        <div class="mst-dl-item-title">expected time:</div>
         <div class="mst-dl-item-value">
-          <mst-knowledge-slider [defaultKnowledge]="defaultKnowledge" (newKnowledge)="updateKnowledge($event)"></mst-knowledge-slider>
+          <mst-slider [min]="0" [max]="60" [step]="1" [defaultValue]="defaultExpectedTime" (valueChange)="expectedTimeChange($event)"></mst-slider>
         </div>
       </div>
-
+      
       <div class="mst-dl-item mst-dl-item-center mst-padding-0" *ngIf="todo.expectedTime">
         <div class="mst-dl-item-title">spent time:</div>
         <div class="mst-dl-item-value">
           <mst-todo-timer
             [expectedTime]="todo.expectedTime" [usedTime]="todo.usedTime"
             (newTime)="updateUsedTime($event)"></mst-todo-timer>
+        </div>
+      </div>
+    
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">days:</div>
+        <div class="mst-dl-item-value">
+          {{ todo.happenDate | daysDiff }}
         </div>
       </div>
 
@@ -53,22 +47,15 @@
         </div>
       </div>
       <div class="mst-dl-item">
+        <div class="mst-dl-item-title">happen date:</div>
+        <div class="mst-dl-item-value">
+          <mst-datepicker [defaultDate]="todo.happenDate" (newDate)="pickHappenDate($event)"></mst-datepicker>
+        </div>
+      </div>
+      <div class="mst-dl-item">
         <div class="mst-dl-item-title">project:</div>
         <div class="mst-dl-item-value">
           <mst-project-list [activeProject]="project" (selected)="selectProject($event)"></mst-project-list>
-        </div>
-      </div>
-      <div class="mst-dl-item mst-dl-item-center mst-padding-0">
-        <div class="mst-dl-item-title">expected time:</div>
-        <div class="mst-dl-item-value">
-          <mst-slider [min]="0" [max]="60" [step]="1" [defaultValue]="defaultExpectedTime" (valueChange)="expectedTimeChange($event)"></mst-slider>
-        </div>
-      </div>
-  
-      <div class="mst-dl-item">
-        <div class="mst-dl-item-title">note:</div>
-        <div class="mst-dl-item-value">
-          <mst-input [control]="noteControl" [hasBorder]="false"></mst-input>
         </div>
       </div>
   
@@ -88,6 +75,13 @@
         <div class="mst-dl-item-title">finished at:</div>
         <div class="mst-dl-item-value">
           {{ todo.finishedAt | date:'short' }}
+        </div>
+      </div>
+
+      <div class="mst-dl-item">
+        <div class="mst-dl-item-title">note:</div>
+        <div class="mst-dl-item-value">
+          <mst-input [control]="noteControl" [hasBorder]="false"></mst-input>
         </div>
       </div>
 

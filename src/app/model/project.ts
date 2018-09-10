@@ -12,6 +12,7 @@ export interface Project {
   goal: string;
   status: ProjectStatus;
   progress: number;
+  clarity: number;
 }
 export enum ProjectStatus {
   Active = 'Active',
@@ -54,7 +55,8 @@ export function createProject(data: any): Project {
     createdAt: timestamp,
     updatedAt: timestamp,
     finishedAt: undefined,
-    progress: 0
+    progress: 0,
+    clarity: data.clarity,
   };
 }
 export function mapProjectStatusToText(status: ProjectStatus): string {
