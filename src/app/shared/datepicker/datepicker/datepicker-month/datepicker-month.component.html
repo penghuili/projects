@@ -1,7 +1,7 @@
 <div class="mst-datepicker-month-nav">
-  <mst-icon name="keyboard_arrow_left" (click)="prevMonth()"></mst-icon>
+  <mst-arrow-left (click)="prevMonth()"></mst-arrow-left>
   <div class="mst-datepicker-month-current">{{ oneDayOfCurrentMonth | date:'MMMM yyyy' }}</div>
-  <mst-icon name="keyboard_arrow_right" (click)="nextMonth()"></mst-icon>
+  <mst-arrow-right (click)="nextMonth()"></mst-arrow-right>
 </div>
 <mst-datepicker-month-row [days]="weeks"></mst-datepicker-month-row>
 <mst-datepicker-month-row

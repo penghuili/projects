@@ -1,7 +1,7 @@
 <div class="mst-timeline-item" [style.padding-bottom.px]="paddingBottom">
   <div class="mst-timeline-icon">
-    <mst-icon name="keyboard_arrow_down" [color]="'accent'" *ngIf="!reverse"></mst-icon>
-    <mst-icon name="keyboard_arrow_up" [color]="'accent'" *ngIf="reverse"></mst-icon>
+    <mst-arrow-down [color]="'accent'" *ngIf="!reverse"></mst-arrow-down>
+    <mst-arrow-up [color]="'accent'" *ngIf="reverse"></mst-arrow-up>
   </div>
   <div class="mst-timeline-date">{{ time | date:'short' }} {{ id }}</div>
 
