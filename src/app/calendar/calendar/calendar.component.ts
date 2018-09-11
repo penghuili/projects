@@ -34,6 +34,7 @@ export class CalendarComponent extends Unsub implements OnInit {
         if (date) {
           this.startDate = date;
           this.defaultStart = MstLocalStorage.get('monster-projects-calendar-start-date') || Math.max(date, subDays(Date.now(), 7).getTime());
+          this.shouldLoad.next({start: this.defaultStart, end: this.defaultEnd});
         }
       })
     );
