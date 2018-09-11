@@ -8,7 +8,7 @@ import { startOfDay, endOfDay, differenceInCalendarDays } from 'date-fns';
   templateUrl: './start-date-end-date-picker.component.html',
   styleUrls: ['./start-date-end-date-picker.component.scss']
 })
-export class StartDateEndDatePickerComponent implements OnChanges {
+export class StartDateEndDatePickerComponent {
   @Input() startDate = Date.now();
   @Input() defaultStartDate = Date.now();
   @Input() defaultEndDate = Date.now();
@@ -18,16 +18,6 @@ export class StartDateEndDatePickerComponent implements OnChanges {
   private start = Date.now();
   private end = Date.now();
   constructor() { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.defaultStartDate) {
-      this.start = this.defaultStartDate;
-    }
-    if (changes.defaultEndDate) {
-      this.end = this.defaultEndDate;
-    }
-    this.newStartEnd.emit(this.formatStartEnd());
-  }
 
   changeStartDate(date: number) {
     this.start = date;
