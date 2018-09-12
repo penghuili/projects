@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { InputControl } from '../../../model/input-control';
 import { PickerOption } from '../../../model/picker';
-import { Unsub } from '../../../static/class/unsub';
 
 @Component({
   selector: 'mst-picker',
@@ -10,28 +8,19 @@ import { Unsub } from '../../../static/class/unsub';
   styleUrls: ['./picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PickerComponent extends Unsub implements OnInit {
-  @Input() control: InputControl<PickerOption>;
+export class PickerComponent {
+  @Input() set defaultValue(value: PickerOption) {
+    this.outerOption = value;
+    this.innerOption = value;
+  }
   @Input() options: PickerOption[];
   @Input() disabled = false;
+  @Output() newValue = new EventEmitter<PickerOption>();
 
   isShow = false;
   showError: boolean;
   innerOption: PickerOption;
   private outerOption: PickerOption;
-
-  constructor() {
-    super();
-  }
-
-  ngOnInit() {
-    this.addSubscription(
-      this.control.setValue$.subscribe(value => {
-        this.outerOption = value;
-        this.innerOption = value;
-      })
-    );
-  }
 
   onOpen() {
     this.isShow = true;
@@ -46,7 +35,7 @@ export class PickerComponent extends Unsub implements OnInit {
     if (this.canSelect(this.innerOption)) {
       this.isShow = false;
       this.outerOption = this.innerOption;
-      this.control.receiveValue(this.innerOption);
+      this.newValue.emit(this.innerOption);
     }
   }
   onCancel() {

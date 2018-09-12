@@ -26,8 +26,8 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   undoneTodos: Todo[];
   doneTodos: Todo[];
   titleControl = new InputControl<string>({ required: true });
-  statusControl = new InputControl<PickerOption>({ required: true });
   goalControl = new InputControl<string>({ required: true });
+  status: PickerOption;
   startDate: number;
   endDate: number;
   startOfEndDate: number;
@@ -79,7 +79,6 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.updateProject();
     this.listenToTitleChange();
     this.listenToClarityChange();
-    this.listenToStatusChange();
     this.listenToGoalChange();
   }
 
@@ -106,6 +105,17 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
     this.calcDays(this.project);
     this.shouldUpdateProject.next(this.project);
   }
+  selectStatus(option: PickerOption) {
+    if ((option.value === ProjectStatus.Done || option.value === ProjectStatus.WontDo) && this.undoneTodos && this.undoneTodos.length > 0) {
+      this.showStatusError = true;
+      this.status = this.statusOptions.find(a => a.value === this.project.status);
+    } else {
+      this.showStatusError = false;
+      const finishedAt = option.value === ProjectStatus.WontDo || option.value === ProjectStatus.Done ? Date.now() : undefined;
+      this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value, finishedAt });
+      this.shouldUpdateProject.next(this.project);
+    }
+  }
   createdTodo() {
     this.shouldLoadTodos.next(true);
   }
@@ -130,8 +140,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
         if (this.project) {
           this.titleControl.setValue(this.project.title);
           this.goalControl.setValue(this.project.goal);
-          const statusOption: PickerOption = projectStatusOptions.find(a => a.value === this.project.status);
-          this.statusControl.setValue(statusOption);
+          this.status = projectStatusOptions.find(a => a.value === this.project.status);
       
           this.defaultClarity = project.clarity || 0;
           this.startDate = this.project.startDate;
@@ -186,21 +195,6 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
       this.clarityEvent.asObservable().pipe(debounceTime(500)).subscribe(clarity => {
         this.project = merge<Project, Partial<Project>>(this.project, { clarity });
         this.shouldUpdateProject.next(this.project);
-      })
-    );
-  }
-  private listenToStatusChange() {
-    this.addSubscription(
-      this.statusControl.value$.pipe(filter(a => !!a)).subscribe(option => {
-        if ((option.value === ProjectStatus.Done || option.value === ProjectStatus.WontDo) && this.undoneTodos && this.undoneTodos.length > 0) {
-          this.showStatusError = true;
-          this.statusControl.setValue(this.statusOptions.find(a => a.value === this.project.status), {emitEvent: false});
-        } else {
-          this.showStatusError = false;
-          const finishedAt = option.value === ProjectStatus.WontDo || option.value === ProjectStatus.Done ? Date.now() : undefined;
-          this.project = merge<Project, Partial<Project>>(this.project, { status: <ProjectStatus>option.value, finishedAt });
-          this.shouldUpdateProject.next(this.project);
-        }
       })
     );
   }

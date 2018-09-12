@@ -3,8 +3,7 @@
   [timeNext]="projects[i + 1] ? projects[i + 1].finishedAt : null"
   [reverse]="true"
   [id]="p.id">
-  <div [class.mst-grey]="p.status === ProjectStaus.WontDo"
-    [class.mst-green]="p.status === ProjectStaus.Done"
+  <div class="mst-green"
     (click)="goToDetail(p.id)">{{ p.title }}</div>
   <div>
     <mst-paragraphs [text]="p.goal"></mst-paragraphs>

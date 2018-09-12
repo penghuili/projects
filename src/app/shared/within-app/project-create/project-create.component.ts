@@ -20,7 +20,7 @@ export class ProjectCreateComponent extends Unsub {
 
   titleControl = new InputControl<string>({ required: true });
   goalControl = new InputControl<string>();
-  statusControl = new InputControl<PickerOption>({ required: true });
+  status: PickerOption;
 
   defaultStartDate = Date.now();
   startOfDefaultEndDate = addDays(this.defaultStartDate, 1).getTime();
@@ -30,7 +30,7 @@ export class ProjectCreateComponent extends Unsub {
 
   constructor(private projectService: ProjectService) {
     super();
-    this.statusControl.setValue(this.statusOptions.find(a => a.value === ProjectStatus.Inactive));
+    this.status = this.statusOptions.find(a => a.value === ProjectStatus.Inactive);
   }
 
   open() {
@@ -49,6 +49,9 @@ export class ProjectCreateComponent extends Unsub {
   clarityChange(clarity: number) {
     this.clarity = clarity;
   }
+  selectStatus(option: PickerOption) {
+    this.status = option;
+  }
   create() {
     if (this.titleControl.valid) {
       const timestamp = Date.now();
@@ -57,7 +60,7 @@ export class ProjectCreateComponent extends Unsub {
         goal: this.goalControl.getValue(),
         startDate: this.defaultStartDate,
         endDate: this.defaultEndDate,
-        status: <ProjectStatus>this.statusControl.getValue().value,
+        status: <ProjectStatus>this.status.value,
         createdAt: timestamp,
         updatedAt: timestamp,
         finishedAt: undefined,

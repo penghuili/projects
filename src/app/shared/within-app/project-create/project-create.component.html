@@ -11,7 +11,7 @@
       <div class="mst-dl-item">
         <div class="mst-dl-item-title">status</div>
         <div class="mst-dl-item-value">
-          <mst-picker [control]="statusControl" [options]="statusOptions"></mst-picker>
+          <mst-picker [defaultValue]="status" [options]="statusOptions" (newValue)="selectStatus($event)"></mst-picker>
         </div>
       </div>
 
