@@ -16,6 +16,7 @@
         <mst-label class="mst-progress-thumb" *ngSwitchDefault
           color="accent" (click)="iconClicked.emit(true)"></mst-label>
       </ng-container>
+      <div class="mst-progress-thumb-fill"></div>
       <div
         [class.mst-progress-thumb-label-left]="progress < 0.5"
         [class.mst-progress-thumb-label-right]="progress >= 0.5">{{ label }}</div>
