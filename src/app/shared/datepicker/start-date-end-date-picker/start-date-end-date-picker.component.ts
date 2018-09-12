@@ -15,12 +15,13 @@ export class StartDateEndDatePickerComponent {
   @Output() newStartEnd = new EventEmitter<StartDateEndDate>();
   days = 1;
 
-  private start = Date.now();
-  private end = Date.now();
+  private start: number;
+  private end: number;
   constructor() { }
 
   changeStartDate(date: number) {
     this.start = date;
+    this.end = this.end || this.defaultEndDate;
     if (this.start > this.end) {
       this.defaultEndDate = this.start;
       this.end = this.start;
@@ -28,6 +29,7 @@ export class StartDateEndDatePickerComponent {
     this.newStartEnd.emit(this.formatStartEnd());
   }
   changeEndDate(date: number) {
+    this.start = this.start || this.defaultStartDate;
     this.end = date;
     if (this.end < this.start) {
       this.defaultStartDate = this.end;
