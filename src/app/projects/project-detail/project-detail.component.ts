@@ -13,6 +13,7 @@ import { Project, ProjectStatus, projectStatusOptions } from '../../model/projec
 import { Tab } from '../../model/tab';
 import { Todo, TodoStatus } from '../../model/todo';
 import { Unsub } from '../../static/class/unsub';
+import { MstLocalStorage } from '../../model/storage';
 
 @Component({
   selector: 'mst-project-detail',
@@ -57,7 +58,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
       value: 'chart'
     }
   ];
-  activeTab = 'note';
+  activeTab = MstLocalStorage.get('monster-projects-project-detail-active-tab') || 'note';
 
   private shouldUpdateProject = new Subject<Project>();
   private shouldLoadTodos = new BehaviorSubject<boolean>(true);
@@ -83,6 +84,7 @@ export class ProjectDetailComponent extends Unsub implements OnInit {
   }
 
   changeTab(newTabKey: string) {
+    MstLocalStorage.set('monster-projects-project-detail-active-tab', newTabKey);
     this.activeTab = newTabKey;
   }
   updateClarity(clarity: number) {

@@ -12,6 +12,7 @@ import { Project } from '../../../model/project';
 import { Tab } from '../../../model/tab';
 import { Todo, TodoStatus } from '../../../model/todo';
 import { Unsub } from '../../../static/class/unsub';
+import { MstLocalStorage } from '../../../model/storage';
 
 @Component({
   selector: 'mst-todo-detail',
@@ -40,7 +41,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
       value: 'detail'
     }
   ];
-  activeTab = 'report';
+  activeTab = MstLocalStorage.get('monster-projects-todo-detail-active-tab') || 'report';
 
   private shouldUpdate = new Subject<Todo>();
   private expectedTimeEvent = new Subject<number>();
@@ -64,6 +65,7 @@ export class TodoDetailComponent extends Unsub implements OnInit {
   }
 
   changeTab(newTabKey: string) {
+    MstLocalStorage.set('monster-projects-todo-detail-active-tab', newTabKey);
     this.activeTab = newTabKey;
   }
   selectProject(project: Project) {
