@@ -19,7 +19,7 @@ export class ProjectCreateComponent extends Unsub {
   clarity = 0;
 
   titleControl = new InputControl<string>({ required: true });
-  goalControl = new InputControl<string>({ required: true });
+  goalControl = new InputControl<string>();
   statusControl = new InputControl<PickerOption>({ required: true });
 
   defaultStartDate = Date.now();
@@ -50,7 +50,7 @@ export class ProjectCreateComponent extends Unsub {
     this.clarity = clarity;
   }
   create() {
-    if (this.titleControl.valid && this.goalControl.valid) {
+    if (this.titleControl.valid) {
       const timestamp = Date.now();
       const newProject: Project = {
         title: this.titleControl.getValue(),
