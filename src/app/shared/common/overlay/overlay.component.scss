@@ -3,9 +3,9 @@
 .mst-overlay {
   position: fixed;
   left: 0;
-  bottom: 0;
+  top: 0;
   width: 100vw;
-  height: 100vh;
+  height: 150vh;
   z-index: 100;
 
   background-color: $white;
