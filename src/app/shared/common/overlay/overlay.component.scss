@@ -5,8 +5,9 @@
   left: 0;
   top: 0;
   width: 100vw;
-  height: 150vh;
+  height: 100vh;
   z-index: 100;
+  overflow: auto;
 
   background-color: $white;
 }
