@@ -24,7 +24,7 @@ export class TodoTimerComponent implements OnChanges {
   private startTime: number;
 
   ngOnChanges() {
-    if (this.expectedTime && this.usedTime !== undefined) {
+    if (this.expectedTime) {
       this.expectedTime = this.expectedTime;
       this.usedTime = this.usedTime || 0;
       this.totalTime = this.parseSeconds(this.expectedTime);
@@ -45,6 +45,7 @@ export class TodoTimerComponent implements OnChanges {
   private start() {
     if (this.expectedTime) {
       this.isDoing = true;
+      this.startTime = Date.now();
       this.sub = interval(1000).subscribe(a => {
         a = a + 2;
         this.progress = this.prevProgress + a / this.expectedTime;

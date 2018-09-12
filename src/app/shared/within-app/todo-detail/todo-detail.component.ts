@@ -73,7 +73,8 @@ export class TodoDetailComponent extends Unsub implements OnInit {
     this.shouldUpdate.next(this.todo);
   }
   updateUsedTime(time: number) {
-    this.todo = merge<Todo, Partial<Todo>>(this.todo, { usedTime: this.todo.usedTime + time });
+    const usedTime = this.todo.usedTime || 0;
+    this.todo = merge<Todo, Partial<Todo>>(this.todo, { usedTime: usedTime + time });
     this.shouldUpdate.next(this.todo);
   }
   pickHappenDate(date: number) {
