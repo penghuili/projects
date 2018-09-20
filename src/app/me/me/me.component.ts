@@ -4,6 +4,7 @@ import { ProjectService } from '../../core/services/project.service';
 import { TodoService } from '../../core/services/todo.service';
 import { Project } from '../../model/project';
 import { Todo } from '../../model/todo';
+import { DbService } from '../../core/services/db.service';
 
 declare var require: any;
 const { version: appVersion } = require('../../../../package.json');
@@ -19,7 +20,9 @@ export class MeComponent implements OnInit {
   private projects: Project[];
   private todos: Todo[];
 
-  constructor(private projectService: ProjectService,
+  constructor(
+    private db: DbService,
+    private projectService: ProjectService,
     private todoService: TodoService) { }
 
   ngOnInit() {
@@ -44,5 +47,43 @@ export class MeComponent implements OnInit {
     el.setAttribute('href', dataStr);
     el.setAttribute('download', "todos.json");
     el.click();
+  }
+  loadProjects(event) {
+    if (event.target && event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse((<any>e.target).result);
+          if (data && data.length > 0) {
+            this.db.getInstance().projects.bulkAdd(data)
+              .then(res => {
+                console.log(res);
+              });
+          }
+        } catch (err) {
+          alert(JSON.stringify(err));
+        }
+      }
+      reader.readAsText(event.target.files[0])
+    }
+  }
+  loadTodos(event) {
+    if (event.target && event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse((<any>e.target).result);
+          if (data && data.length > 0) {
+            this.db.getInstance().todos.bulkAdd(data)
+              .then(res => {
+                console.log(res);
+              });
+          }
+        } catch (err) {
+          alert(JSON.stringify(err));
+        }
+      }
+      reader.readAsText(event.target.files[0])
+    }
   }
 }

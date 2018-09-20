@@ -9,5 +9,11 @@
 
 <a id="mst-download-projects" style="display:none"></a>
 <a id="mst-download-todos" style="display:none"></a>
-<button (click)="downloadProjects()">download projects</button>
-<button (click)="downloadTodos()">download todos</button>
+<div>
+  <button (click)="downloadProjects()">download projects</button>
+  <button (click)="downloadTodos()">download todos</button>
+</div>
+<div>
+  <input type="file" (change)="loadProjects($event)">
+  <input type="file" (change)="loadTodos($event)">
+</div>
