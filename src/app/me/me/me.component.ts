@@ -26,12 +26,12 @@ export class MeComponent implements OnInit {
     private todoService: TodoService) { }
 
   ngOnInit() {
-    this.projectService.getAll().subscribe(ps => {
-      this.projects = ps;
-    })
-    this.todoService.getAll().subscribe(ts => {
-      this.todos = ts;
-    })
+    // this.projectService.getAll().subscribe(ps => {
+    //   this.projects = ps;
+    // })
+    // this.todoService.getAll().subscribe(ts => {
+    //   this.todos = ts;
+    // })
   }
 
   downloadProjects() {
