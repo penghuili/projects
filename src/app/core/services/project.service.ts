@@ -36,6 +36,16 @@ export class ProjectService {
       })
     );
   }
+  getAll(): Observable<Project[]> {
+    return from(
+      this.db.getInstance().projects.toArray()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
+  }
   getById(id: number): Observable<Project> {
     return from(
       this.db.getInstance().projects

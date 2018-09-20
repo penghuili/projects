@@ -23,6 +23,17 @@ export class TodoService {
       })
     );
   }
+  getAll(): Observable<Todo[]> {
+    return from(
+      this.db.getInstance().todos
+      .toArray()
+    ).pipe(
+      catchError(error => {
+        alert(JSON.stringify(error));
+        return of(null);
+      })
+    );
+  }
   getById(id: number): Observable<Todo> {
     return from(
       this.db.getInstance().todos
