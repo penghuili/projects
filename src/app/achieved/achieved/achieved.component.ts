@@ -37,7 +37,7 @@ export class AchievedComponent extends Unsub implements OnInit {
   }
 
   goToDetail(id: number) {
-    this.router.navigateByUrl(`/${ROUTES.PROJECTS}/${id}`);
+    this.router.navigateByUrl(`/${ROUTES.LIST}/${id}`);
   }
   reload() {
     this.shouldLoad.next(true);

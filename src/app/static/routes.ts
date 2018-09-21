@@ -1,5 +1,5 @@
 export const ROUTES = {
-  PROJECTS: 'projects',
+  LIST: 'list',
   CALENDAR: 'calendar',
   ACHIEVED: 'achieved',
   TODOS: 'todos',

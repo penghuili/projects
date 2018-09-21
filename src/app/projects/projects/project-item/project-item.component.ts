@@ -16,6 +16,6 @@ export class ProjectItemComponent {
   constructor(private router: Router) {}
 
   goToDetail() {
-    this.router.navigateByUrl(`/${ROUTES.PROJECTS}/${this.project.id}`);
+    this.router.navigateByUrl(`/${ROUTES.LIST}/${this.project.id}`);
   }
 }

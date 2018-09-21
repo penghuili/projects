@@ -8,15 +8,15 @@ import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
   {
-    path: `${ROUTES.PROJECTS}/${ROUTES.TODOS}/:id`,
+    path: `${ROUTES.LIST}/${ROUTES.TODOS}/:id`,
     component: TodoDetailComponent
   },
   {
-    path: `${ROUTES.PROJECTS}/:id`,
+    path: `${ROUTES.LIST}/:id`,
     component: ProjectDetailComponent
   },
   {
-    path: ROUTES.PROJECTS,
+    path: ROUTES.LIST,
     component: ProjectsComponent
   }
 ];
