@@ -25,7 +25,7 @@ export class AchievedCreateComponent extends Unsub {
     this.isShow = true;
   }
   create() {
-    if (this.titleControl.valid && this.goalControl.valid) {
+    if (this.titleControl.valid) {
       const timestamp = Date.now();
       const newProject: Project = {
         title: this.titleControl.getValue(),
