@@ -5,8 +5,6 @@
 
 <div>{{ appVersion }}</div>
 
-<div class="mst-grey mst-padding-top-0-5">built with angular</div>
-
 <!-- <a id="mst-download-projects" style="display:none"></a>
 <a id="mst-download-todos" style="display:none"></a>
 <div>
@@ -17,3 +15,4 @@
   <input type="file" (change)="loadProjects($event)">
   <input type="file" (change)="loadTodos($event)">
 </div> -->
+<div class="mst-padding-1-0"><button (click)="downloadAll()">export as json file</button></div>
